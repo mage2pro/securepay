@@ -1,0 +1,19 @@
+<?xml version='1.0'?>
+<config
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='urn:magento:module:Magento_Store:etc/config.xsd'
+>
+    <default>
+		<df_payment>
+			<secure_pay>
+				<title>SecurePay</title>
+				<title_backend>SecurePay</title_backend>
+			</secure_pay>
+		</df_payment>
+        <payment>
+            <dfe_secure_pay>
+				<model>Dfe\SecurePay\Method</model>
+            </dfe_secure_pay>
+        </payment>
+    </default>
+</config>
