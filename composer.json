@@ -1,0 +1,16 @@
+{
+	"name": "mage2pro/securepay"
+	,"version": "0.0.1"
+	,"description": "«SecurePay» Magento 2 payment extension."
+	,"type": "magento2-module"
+	,"homepage": "https://mage2.pro/c/extensions/securepay"
+	,"license": "proprietary"
+	,"authors": [{
+		"name": "Dmitry Fedyuk",
+		"email": "admin@mage2.pro",
+		"homepage": "https://mage2.pro/users/dmitry_fedyuk",
+		"role": "Developer"
+	}]
+	,"require": {"mage2pro/core": "^1.7.13"}
+	,"autoload": {"files": ["registration.php"], "psr-4": {"Dfe\\SecurePay\\": ""}}
+}
