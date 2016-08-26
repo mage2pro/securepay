@@ -68,7 +68,7 @@
 					id='forceResult'
 					translate='label'
 					type='select'
-					sortOrder='6'
+					sortOrder='4'
 					showInDefault='1'
 					showInWebsite='1'
 					showInStore='1'
@@ -83,6 +83,38 @@
 					<depends>
 						<field id='enable'>1</field>
 						<field id='test'>1</field>
+					</depends>
+				</field>
+				<field
+					id='liveMerchantID'
+					translate='label'
+					sortOrder='7'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Live Merchant ID</label>
+					<validate>required-entry</validate>
+					<depends>
+						<field id='enable'>1</field>
+						<field id='test'>0</field>
+					</depends>
+				</field>
+				<field
+					id='liveTransactionPassword'
+					translate='label'
+					type='obscure'
+					sortOrder='8'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Live Transaction Password</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					<validate>required-entry</validate>
+					<depends>
+						<field id='enable'>1</field>
+						<field id='test'>0</field>
 					</depends>
 				</field>
 			</group>
