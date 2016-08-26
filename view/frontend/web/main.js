@@ -1,13 +1,86 @@
 // 2016-08-25
 define ([
-	'Df_Payment/card'
-], function(parent) {'use strict'; return parent.extend({
+	'df', 'Df_Payment/card'
+], function(df, parent) {'use strict'; return parent.extend({
+	/**
+	 * 2016-08-26
+	 * «3.6.2 Simulating Approved and Declined Transactions
+	 * You can simulate approved and declined transactions by submitting alternative payment amounts.
+	 * If the payment amount ends in 00, 08, 11 or 16,
+	 * the transaction will be approved once card details are submitted.
+	 * All other options will cause a declined transaction.»
+	 * @override
+	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
+	 * @returns {String}
+	 */
+	debugMessage: df.c(function() {
+		/** @type {String} */
+		var forceResult = this.config('forceResult');
+		/** @type {Boolean} */
+		var approved = -1 !== ['00', '08', '11', '16'].indexOf(this.amoutLast2());
+		/** @type {Boolean} */
+		var approve = 'approve' === forceResult;
+		/** @type {Boolean} */
+		var needAdjust = ('no' !== forceResult) && (approve !== approved);
+		/**
+		 * @param {Boolean} approved
+		 * @returns {String}
+		 */
+		function label(approved) {return df.t(approved ? 'approved' : 'declined');}
+		/** @type {String} */
+		var result;
+		if (!needAdjust) {
+			result = df.t(
+				'The transaction will be <b>{result}</b>, because the payment amount ends with «<b>{last2}</b>».'
+				,{
+					last2: this.amoutLast2()
+					,result: label(approved)
+				}
+			);
+		}
+		else {
+			/** @type {Number} */
+			var currentA = this.dfc.grandTotal();
+			/** @type {Number} */
+			var newA = approve ? Math.round(currentA) : currentA + 1;
+			result = df.t(
+				'The payment amount will be adjusted from <b>{current}</b> to <b>{new}</b>, so the transaction will be <b>{result}</b>.'
+				,{
+					current: this.dfc.formatMoney(currentA)
+					,'new': this.dfc.formatMoney(newA)
+					,result: label(approve)
+				}
+			);
+		}
+		return result;
+	}),
 	/**
 	 * 2016-08-25
 	 * https://mage2.pro/t/1989
 	 * @returns {String[]}
 	 */
 	getCardTypes: function() {return ['VI', 'MC'];},
+	/**
+	 * 2016-08-26
+	 * @return {Object}
+	*/
+	initialize: function() {
+		this._super();
+		// 2016-08-26
+		// https://mage2.pro/t/1991
+		/**
+		 * 2016-08-26
+		 * «[SecurePay] The test bank card» https://mage2.pro/t/1991
+		 * Так как тестовая карта всего одна, то я не стал вводить опцию «prefill»,
+		 * ведь всё равно тестировщик не может указать другую карту.
+		 */
+		if (this.isTest()) {
+			this.creditCardNumber('4444333322221111');
+			this.prefillWithAFutureData();
+			this.creditCardVerificationNumber(123);
+		}
+		return this;
+	},
 	/**
 	 * 2016-08-25
 	 * @override

@@ -50,6 +50,41 @@
 					<comment><![CDATA[It is shown on the checkout screen.]]></comment>
 					<depends><field id='enable'>1</field></depends>
 				</field>
+				<field
+					id='test'
+					translate='label'
+					type='Df\Framework\Form\Element\Checkbox'
+					sortOrder='3'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Test Mode?</label>
+					<backend_model>Df\Config\Backend\Checkbox</backend_model>
+					<comment><![CDATA[<a href='https://mage2.pro/t/1991' target='_blank'>The test bank card</a>.]]></comment>
+					<depends><field id='enable'>1</field></depends>
+				</field>
+				<field
+					id='forceResult'
+					translate='label'
+					type='select'
+					sortOrder='6'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Force the payment transactions result?</label>
+					<source_model>Dfe\SecurePay\Source\ForceResult</source_model>
+					<comment><![CDATA[SecurePay approves a test transaction only if the payment amount ends in 00, 08, 11 or 16.
+<br/>SecurePay declines a test transaction in all the other cases.
+<br/>If you choose the «<b>Approve</b>» value, then the payment amounts will be adjusted, so they will end in <b>00</b>.
+<br/>If you choose the «<b>Decline</b>» value, then the payment amounts will be adjusted, so they will end in <b>01</b>.
+<br/>If you choose the «<b>No</b>» value, then the payment amounts will not be changed, and a transaction will be approveds or declined depend on its payment amount.]]></comment>
+					<depends>
+						<field id='enable'>1</field>
+						<field id='test'>1</field>
+					</depends>
+				</field>
 			</group>
         </section>
     </system>

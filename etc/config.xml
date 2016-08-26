@@ -6,6 +6,7 @@
     <default>
 		<df_payment>
 			<secure_pay>
+                <forceResult>approve</forceResult>
 				<title>SecurePay</title>
 				<title_backend>SecurePay</title_backend>
 			</secure_pay>

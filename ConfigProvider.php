@@ -11,5 +11,6 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	 * @return array(string => mixed)
 	 */
 	protected function config() {return [
+		'forceResult' => $this->s()->forceResult()
 	] + parent::config();}
 }
