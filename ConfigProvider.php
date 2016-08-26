@@ -13,4 +13,13 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	protected function config() {return [
 		'forceResult' => $this->s()->forceResult()
 	] + parent::config();}
+
+	/**
+	 * 2016-08-26
+	 * @override
+	 * @see \Df\Payment\ConfigProvider::route()
+	 * @used-by \Df\Payment\ConfigProvider::getConfig()
+	 * @return string
+	 */
+	protected function route() {return 'dfe-securepay';}
 }

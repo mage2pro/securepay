@@ -5,6 +5,13 @@ namespace Dfe\SecurePay;
 final class Settings extends \Df\Payment\Settings\BankCard {
 	/**
 	 * 2016-08-26
+	 * «Mage2.PRO» → «Payment» → «SecurePay» → «Enable 3D Secure Validation?»
+	 * @return bool
+	 */
+	public function enable3DS() {return $this->b();}
+
+	/**
+	 * 2016-08-26
 	 * «Mage2.PRO» → «Payment» → «SecurePay» → «Force the payment transactions result?»
 	 * @return bool
 	 */
@@ -15,6 +22,13 @@ final class Settings extends \Df\Payment\Settings\BankCard {
 	 * @return string
 	 */
 	public function merchantID() {return $this->testable();}
+
+	/**
+	 * 2016-08-26
+	 * «Mage2.PRO» → «Payment» → «SecurePay» → «Merchant ID for 3D Secure Validation»
+	 * @return bool
+	 */
+	public function merchantID_3DS() {return $this->v();}
 
 	/**
 	 * 2016-08-26

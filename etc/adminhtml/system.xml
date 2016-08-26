@@ -88,13 +88,18 @@
 				<field
 					id='liveMerchantID'
 					translate='label'
-					sortOrder='7'
+					sortOrder='5'
 					showInDefault='1'
 					showInWebsite='1'
 					showInStore='1'
 				>
 					<label>Live Merchant ID</label>
-					<validate>required-entry</validate>
+					<!--
+						2016-08-26
+						Direct Post Integration Guide, 5.1.1.1. EPS_MERCHANT
+					-->
+					<validate>required-entry validate-length maximum-length-7 minimum-length-7</validate>
+					<comment><![CDATA[SecurePay Customer Support will supply your Merchant ID when your account is activated.<br/>The Merchant ID will be of the format “ABC0010”, where ABC is your unique three-letter account code, also used for logging in to the SecurePay Merchant Log In.]]></comment>
 					<depends>
 						<field id='enable'>1</field>
 						<field id='test'>0</field>
@@ -104,7 +109,7 @@
 					id='liveTransactionPassword'
 					translate='label'
 					type='obscure'
-					sortOrder='8'
+					sortOrder='6'
 					showInDefault='1'
 					showInWebsite='1'
 					showInStore='1'
@@ -115,6 +120,36 @@
 					<depends>
 						<field id='enable'>1</field>
 						<field id='test'>0</field>
+					</depends>
+				</field>
+				<field
+					id='enable3DS'
+					translate='label'
+					type='Df\Framework\Form\Element\Checkbox'
+					sortOrder='7'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Enable 3D Secure Validation?</label>
+					<backend_model>Df\Config\Backend\Checkbox</backend_model>
+					<comment></comment>
+					<depends><field id='enable'>1</field></depends>
+				</field>
+				<field
+					id='merchantID_3DS'
+					translate='label'
+					sortOrder='8'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Merchant ID for 3D Secure Validation</label>
+					<validate>required-entry validate-length maximum-length-19</validate>
+					<comment><![CDATA[Your online merchant number specified by your bank which has been registered for Verified by Visa or SecureCode, or both. This will be your bank merchant number, e.g. "22123456".]]></comment>
+					<depends>
+						<field id='enable'>1</field>
+						<field id='enable3DS'>1</field>
 					</depends>
 				</field>
 			</group>

@@ -1,7 +1,7 @@
 // 2016-08-25
 define ([
-	'df', 'Df_Payment/card'
-], function(df, parent) {'use strict'; return parent.extend({
+	'df', 'Df_Core/js/redirectWithPost', 'Df_Payment/card', 'jquery'
+], function(df, redirectWithPost, parent, $) {'use strict'; return parent.extend({
 	/**
 	 * 2016-08-26
 	 * «3.6.2 Simulating Approved and Declined Transactions
@@ -17,7 +17,7 @@ define ([
 		/** @type {String} */
 		var forceResult = this.config('forceResult');
 		/** @type {Boolean} */
-		var approved = -1 !== ['00', '08', '11', '16'].indexOf(this.amoutLast2());
+		var approved = -1 !== ['00', '08', '11', '16'].indexOf(this.amountLast2());
 		/** @type {Boolean} */
 		var approve = 'approve' === forceResult;
 		/** @type {Boolean} */
@@ -33,7 +33,7 @@ define ([
 			result = df.t(
 				'The transaction will be <b>{result}</b>, because the payment amount ends with «<b>{last2}</b>».'
 				,{
-					last2: this.amoutLast2()
+					last2: this.amountLast2()
 					,result: label(approved)
 				}
 			);
@@ -42,7 +42,7 @@ define ([
 			/** @type {Number} */
 			var currentA = this.dfc.grandTotal();
 			/** @type {Number} */
-			var newA = approve ? Math.round(currentA) : currentA + 1;
+			var newA = approve ? Math.round(currentA) : currentA + 0.01;
 			result = df.t(
 				'The payment amount will be adjusted from <b>{current}</b> to <b>{new}</b>, so the transaction will be <b>{result}</b>.'
 				,{
@@ -80,6 +80,23 @@ define ([
 			this.creditCardVerificationNumber(123);
 		}
 		return this;
+	},
+	/**
+	 * 2016-08-26
+	 * @override
+	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
+	 * @used-by placeOrderInternal()
+	 */
+	onSuccess: function(json) {
+		/** @type {Object} */
+		var data = $.parseJSON(json);
+		// @see \Dfe\SecurePay\Method::getConfigPaymentAction()
+		redirectWithPost(data.uri, df.o.merge(data.params, {
+			EPS_CCV: this.dfCardVerification()
+			,EPS_EXPIRYYEAR: this.dfCardExpirationYear()
+			,EPS_CARDNUMBER: this.dfCardNumber()
+			,EPS_EXPIRYMONTH: this.dfCardExpirationMonth()
+		}));
 	},
 	/**
 	 * 2016-08-25
