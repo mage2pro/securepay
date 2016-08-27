@@ -63,37 +63,20 @@ class Charge extends \Df\Payment\R\Charge {
 		 */
 		,'EPS_BILLINGCOUNTRY' => $this->o()->getBillingAddress()->getCountryId()
 		/**
-		 * 2016-08-26
-		 * «Parameter Callback».
-		 * Optional
-		 * String, fully-qualified URL
+		 * 2016-08-27
+		 * Если этот параметр указан, то система передаёт сюда те же параметры, что и на EPS_RESULTURL.
+		 * Учитывая, что система всё равно передаст те же параметры на EPS_RESULTURL,
+		 * то изначально неочевиден смысл реализовывать ещё и  EPS_CALLBACKURL.
 		 *
-		 * «All result fields are sent to your EPS_RESULTURL.
-		 * In addition, a callback URL may also be specified
-		 * to enable separation of the browser process from the update process.
-		 *
-		 * Set EPS_CALLBACKURL similarly to the EPS_RESULTURL.
-		 * Fields are sent via the POST method.
-		 * Following a redirect, fields may be sent via the GET method.
-		 * The result fields will then also include a callback_status_code –
-		 * the HTTP response code from your URL.
-		 *
-		 * Note that your callback URL must not contain multiple redirects or flash content
-		 * or other content that may prevent Direct Post from successfully making a connection.»
-		 *
-		 * «The URL on the Merchant web site that accepts transaction result data as POST elements
-		 * for the purpose of updating a client database or system with the transaction response.
-		 *
-		 * The page is not displayed in the browser.
-		 * The result page may be almost any form of web page,
-		 * including static HTML pages, CGI scripts, ASP pages, JSP pages, PHP scripts.
-		 *
-		 * The EPS_CALLBACKURL must be a URL for a publicly visible page on a web server
-		 * within a domain that is delegated to a public IP number.
-		 * Internal machine names, such as "localhost", Windows-style machine names,
-		 * and privately translated IP numbers will fail.»
+		 * Однако со временем увидел некоторые преимущества:
+		 * 1) унификация архитектуры с другими моими модулями
+		 * 2) упрощение кода контроллера
+		 * (не смешиваем обработку операций возвращения покупателя и оповещения о платеже)
+		 * 3) возможности увидеть статус обработки оповещения о платеже (код HTTP)
+		 * в личном кабинете магазина.
+		 * Поэтому оставил EPS_CALLBACKURL.
 		 */
-		,'EPS_CALLBACKURL' => df_url_callback('dfe-securepay/confirm')
+		,'EPS_CALLBACKURL' => $this->callback()
 		/**
 		 * 2016-08-26
 		 * «5.1.1.12 Currency».
@@ -224,7 +207,7 @@ class Charge extends \Df\Payment\R\Charge {
 		 * Internal machine names, such as "localhost", Windows-style machine names,
 		 * and privately translated IP numbers will fail.»
 		 */
-		,'EPS_RESULTURL' => df_url_frontend('dfe-securepay/customerReturn')
+		,'EPS_RESULTURL' => $this->customerReturnRemote()
 		/**
 		 * 2016-08-26
 		 * «5.1.1.5 GMT Timestamp».
