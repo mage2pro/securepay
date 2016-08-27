@@ -2,10 +2,7 @@
 // 2016-08-26
 namespace Dfe\SecurePay;
 use Dfe\SecurePay\Settings as S;
-use Magento\Payment\Model\Info as I;
-use Magento\Payment\Model\InfoInterface as II;
-use Magento\Sales\Model\Order\Payment as OP;
-class Charge extends \Df\Payment\Charge {
+class Charge extends \Df\Payment\R\Charge {
 	/**
 	 * 2016-08-26
 	 * @override
@@ -32,32 +29,12 @@ class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2016-08-26
+	 * @override
+	 * @see \Df\Payment\Charge\WithRedirect::params()
+	 * @used-by \Df\Payment\Charge\WithRedirect::p()
 	 * @return array(string => mixed)
 	 */
-	private function _request() {return $this->_requestI() + [
-		/**
-		 * 2016-08-26
-		 * «5.1.1.6 Fingerprint».
-		 * Mandatory
-		 * String, length up to 60
-		 * «A SHA1 hash of
-		 * 		For EPS_TXNTYPE 0-7:
-		 * 		EPS_MERCHANT|TransactionPassword|EPS_TXNTYPE|EPS_REFERENCEID|EPS_AMOUNT|EPS_TIMESTAMP
-		 *
-		 * 		For EPS_TXNTYPE 8:
-		 * 		EPS_MERCHANT|TransactionPassword|EPS_TXNTYPE|EPS_STORETYPE|EPS_REFERENCEID|EPS_TIMESTAMP
-		 * Where the EPS_ prefixed fields are sent in the request
-		 * and “TransactionPassword” is obtained from SecurePay Support
-		 * and maybe changed via the SecurePay Merchant Log In.»
-		 */
-		'EPS_FINGERPRINT' => Signer::i($this->_requestI())->sign()
-	];}
-
-	/**
-	 * 2016-08-26
-	 * @return array(mixed => mixed)
-	 */
-	private function _requestI() {if (!isset($this->{__METHOD__})) {$s = S::s();  $this->{__METHOD__} = [
+	protected function params() {$s = S::s(); return [
 		/**
 		 * 2016-08-26
 		 * Mandatory when EPS_TXNTYPE includes 3D Secure
@@ -189,14 +166,29 @@ class Charge extends \Df\Payment\Charge {
 		,'EPS_MERCHANTNUM' => !$s->enable3DS() ? null : $s->merchantID_3DS()
 		/**
 		 * 2016-08-26
+		 * Result Page Redirects
 		 * Optional (default “FALSE”)
 		 * String, values “FALSE” or “TRUE”
+		 *
+		 * «If your web site redirects the Direct Post result to another page on your site,
+		 * Direct will automatically follow the redirect.
+		 * This will occur until Direct Post is no longer redirected.
+		 *
+		 * Direct Post will POST result parameters the first time it calls your server,
+		 * but Direct Post will send result parameters using the GET method
+		 * based on RFC 2616 standards after being redirected.»
+		 *
 		 * «Directs the system to redirect to the EPS_RESULTURL.
 		 * Result parameters are appended to the URL as a GET string.
 		 * Validate the result fingerprint to ensure integrity of the bank response.
 		 * Use the EPS_CALLBACK if separate database update and page redirect URL’s are required.»
+		 *
+		 * 2016-08-27
+		 * Для моего модуля здесь нужно ставить обязательно TRUE,
+		 * потому что @see \Dfe\SecurePay\Controller\CustomerReturn\Index::execute()
+		 * делает редиректы (на «checkout/onepage/success» или к корзине).
 		 */
-		,'EPS_REDIRECT' => 'FALSE'
+		,'EPS_REDIRECT' => 'TRUE'
 		/**
 		 * 2016-08-26
 		 * «5.1.1.4 Payment Reference».
@@ -298,14 +290,14 @@ class Charge extends \Df\Payment\Charge {
 		 * «Payee’s zip/post code»
 		 */
 		,'EPS_ZIPCODE' => $this->addressSB()->getPostcode()
-	];}return $this->{__METHOD__};}
+	];}
 
 	/**
-	 * 2016-08-26
-	 * @param II|I|OP $payment
-	 * @return array(string => mixed)
+	 * 2016-08-27
+	 * @override
+	 * @see \Df\Payment\Charge\WithRedirect::signatureKey()
+	 * @used-by \Df\Payment\Charge\WithRedirect::p()
+	 * @return string
 	 */
-	public static function request(II $payment) {
-		return (new self([self::$P__PAYMENT => $payment]))->_request();
-	}
+	protected function signatureKey() {return 'EPS_FINGERPRINT';}
 }

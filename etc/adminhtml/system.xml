@@ -11,6 +11,10 @@
                 в английском алфавите: https://en.wikipedia.org/wiki/English_alphabet
 				3-я и 4-я цифры sortOrder соответствуют порядковому номеру второй буквы модуля
                 в английском алфавите.
+
+                2016-08-27
+                SecurePay Direct Post, похоже, не работает на localhost,
+                и тогда надо выдавать предупреждение об этом.
             -->
             <group
                 id='secure_pay'
