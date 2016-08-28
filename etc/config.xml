@@ -6,6 +6,14 @@
     <default>
 		<df_payment>
 			<secure_pay>
+				<!--
+					2016-08-22
+					Значением этой опции по умолчанию и так является true:
+					@see \Df\Payment\Settings::askForBillingAddress()
+					Однако здесь это значение всё равно нужно указать,
+					чтобы галка была установлена для чекбокса.
+				-->
+				<askForBillingAddress>1</askForBillingAddress>
                 <forceResult>approve</forceResult>
 				<!--
 					2016-08-26
@@ -17,7 +25,7 @@
 				-->
                 <testMerchantID>ABC0001</testMerchantID>
 				<testTransactionPassword>abc123</testTransactionPassword>
-				<title>SecurePay</title>
+				<title>Bank Card</title>
 				<title_backend>SecurePay</title_backend>
 			</secure_pay>
 		</df_payment>
