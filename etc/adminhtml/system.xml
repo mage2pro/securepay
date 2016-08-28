@@ -126,6 +126,7 @@
 						<field id='test'>0</field>
 					</depends>
 				</field>
+				<!--
 				<field
 					id='enable3DS'
 					translate='label'
@@ -156,6 +157,7 @@
 						<field id='enable3DS'>1</field>
 					</depends>
 				</field>
+				-->
 			</group>
         </section>
     </system>
