@@ -4,6 +4,24 @@ namespace Dfe\SecurePay;
 use Dfe\SecurePay\Settings as S;
 class Charge extends \Df\Payment\R\Charge {
 	/**
+	 * 2016-08-29
+	 * 2016-08-26
+	 * «5.1.1.4 Payment Reference».
+	 * Mandatory
+	 * String, min length 1, max length 60
+	 * «A string that identifies the transaction.
+	 * This string is stored by SecurePay as the Transaction Reference.
+	 * This field is typically a shopping cart id or invoice number
+	 * and is used to match the SecurePay transaction to your application.»
+	 * @override
+	 * @see \Df\Payment\R\ICharge::requestIdKey()
+	 * @used-by \Df\Payment\R\Charge::p()
+	 * @used-by \Df\Payment\R\Response::requestId()
+	 * @return string
+	 */
+	public static function requestIdKey() {return 'EPS_REFERENCEID';}
+
+	/**
 	 * 2016-08-26
 	 * @override
 	 * @return float
@@ -30,8 +48,8 @@ class Charge extends \Df\Payment\R\Charge {
 	/**
 	 * 2016-08-26
 	 * @override
-	 * @see \Df\Payment\Charge\WithRedirect::params()
-	 * @used-by \Df\Payment\Charge\WithRedirect::p()
+	 * @see \Df\Payment\R\Charge::params()
+	 * @used-by \Df\Payment\R\Charge::p()
 	 * @return array(string => mixed)
 	 */
 	protected function params() {$s = S::s(); return [
@@ -174,17 +192,6 @@ class Charge extends \Df\Payment\R\Charge {
 		,'EPS_REDIRECT' => 'TRUE'
 		/**
 		 * 2016-08-26
-		 * «5.1.1.4 Payment Reference».
-		 * Mandatory
-		 * String, min length 1, max length 60
-		 * «A string that identifies the transaction.
-		 * This string is stored by SecurePay as the Transaction Reference.
-		 * This field is typically a shopping cart id or invoice number
-		 * and is used to match the SecurePay transaction to your application.»
-		 */
-		,'EPS_REFERENCEID' => $this->o()->getIncrementId()
-		/**
-		 * 2016-08-26
 		 * «5.1.1.11 Payment Reference».
 		 * Mandatory
 		 * String, fully-qualified URL
@@ -278,8 +285,8 @@ class Charge extends \Df\Payment\R\Charge {
 	/**
 	 * 2016-08-27
 	 * @override
-	 * @see \Df\Payment\Charge\WithRedirect::signatureKey()
-	 * @used-by \Df\Payment\Charge\WithRedirect::p()
+	 * @see \Df\Payment\R\Charge::signatureKey()
+	 * @used-by \Df\Payment\R\Charge::p()
 	 * @return string
 	 */
 	protected function signatureKey() {return 'EPS_FINGERPRINT';}

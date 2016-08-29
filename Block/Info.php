@@ -8,7 +8,7 @@ use Magento\Framework\DataObject;
  * @method Method method()
  * @method R|string|null responseF(string $key = null)
  */
-class Info extends \Df\Payment\Block\ConfigurableInfo {
+class Info extends \Df\Payment\R\BlockInfo {
 	/**
 	 * 2016-08-28
 	 * @override
