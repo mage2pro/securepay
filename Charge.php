@@ -2,6 +2,7 @@
 // 2016-08-26
 namespace Dfe\SecurePay;
 use Dfe\SecurePay\Settings as S;
+/** @method Method m() */
 class Charge extends \Df\Payment\R\Charge {
 	/**
 	 * 2016-08-29
@@ -24,26 +25,12 @@ class Charge extends \Df\Payment\R\Charge {
 	/**
 	 * 2016-08-26
 	 * @override
+	 * @see \Df\Payment\Operation::amount()
 	 * @return float
 	 */
-	protected function amount() {
-		if (!isset($this->{__METHOD__})) {
-			/** @var float $result */
-			$result = parent::amount();
-			/** @var string $forceResult */
-			$forceResult = S::s()->forceResult();
-			/** @var string $amountLast2 */
-			$amountLast2 = dfp_last2($result);
-			/** @var bool $approved */
-			$approved = in_array($amountLast2, ['00', '08', '11', '16']);
-			/** @var bool $approve */
-			$approve = 'approve' === $forceResult;
-			/** @var bool $needAdjust */
-			$needAdjust = ('no' !== $forceResult) && ($approve !== $approved);
-			$this->{__METHOD__} = !$needAdjust ? $result : ($approve ? round($result) : $result + 0.01);
-		}
-		return $this->{__METHOD__};
-	}
+	protected function amount() {return dfc($this, function() {return
+		$this->m()->adjustAmount(parent::amount());
+	});}
 
 	/**
 	 * 2016-08-26
