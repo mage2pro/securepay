@@ -83,18 +83,38 @@ final class Refund extends \Df\Payment\R\Refund {
 			/** @var string $message */
 			$errorMessage = df_leaf_sne($status->{'statusDescription'});
 		}
-		/**
-		 * 2016-09-01
-		 * При повторной попытке возврата SecurePay всё равно возвращает:
-			<Status>
-				<statusCode>000</statusCode>
-				<statusDescription>Normal</statusDescription>
-			</Status>
-		 */
 		else {
-			$errorMessage = df_leaf_sne(
-				$xxB->{'Payment'}->{'TxnList'}->{'Txn'}->{'thinlinkEventStatusText'}
-			);
+			/**
+			 * 2016-09-01
+			 * При повторной попытке возврата SecurePay всё равно возвращает:
+				<Status>
+					<statusCode>000</statusCode>
+					<statusDescription>Normal</statusDescription>
+				</Status>
+			 *
+			 * Поэтому допольнительно смотрим другой кусок ответа: Payment/TxnList/Txn
+			 * В случае успеха там:
+					<approved>Yes</approved>
+					<responseCode>00</responseCode>
+					<responseText>Approved</responseText>
+					<thinlinkResponseCode>100</thinlinkResponseCode>
+					<thinlinkResponseText>000</thinlinkResponseText>
+					<thinlinkEventStatusCode>000</thinlinkEventStatusCode>
+					<thinlinkEventStatusText>Normal</thinlinkEventStatusText>
+			 * В случае сбоя там:
+					<approved>No</approved>
+					<responseCode>134</responseCode>
+					<responseText>Transaction already fully refunded</responseText>
+					<thinlinkResponseCode>300</thinlinkResponseCode>
+					<thinlinkResponseText>000</thinlinkResponseText>
+					<thinlinkEventStatusCode>999</thinlinkEventStatusCode>
+					<thinlinkEventStatusText>Error - Transaction Already Fully Refunded/Only $x.xx Available for Refund</thinlinkEventStatusText>
+			 */
+			/** @var X $txn */
+			$txn = $xxB->{'Payment'}->{'TxnList'}->{'Txn'};
+			if ('Yes' !== df_leaf_sne($txn->{'approved'})) {
+				$errorMessage = df_leaf_sne($txn->{'thinlinkEventStatusText'});
+			}
 		}
 		if ($errorMessage) {
 			/**
