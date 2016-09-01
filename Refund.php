@@ -33,8 +33,8 @@ final class Refund extends \Df\Payment\R\Refund {
 	private function process() {
 		/** @var S $s */
 		$s = S::s();
-		/** @var string $xmlRequest */
-		$xmlRequest = df_xml_g('SecurePayMessage', [
+		/** @var string $xA */
+		$xA = df_xml_g('SecurePayMessage', [
 			'MessageInfo' => [
 				'messageID' => df_cdata(df_cc('-', $this->cm()->getIncrementId(), df_uid(4)))
 				,'messageTimestamp' => $this->timestamp()
@@ -43,7 +43,7 @@ final class Refund extends \Df\Payment\R\Refund {
 			]
 			,'MerchantInfo' => [
 				'merchantID' => $s->merchantID()
-				,'password' => $s->transactionPassword()
+				,'password' => df_cdata($s->transactionPassword())
 			]
 			,'RequestType' => 'Payment'
 			,'Payment' => [
@@ -63,17 +63,52 @@ final class Refund extends \Df\Payment\R\Refund {
 		$c->setHeaders('content-type', 'text/xml');
 		$c->setConfig(['timeout' => 120]);
 		$c->setUri($this->m()->url('https://{stage}.securepay.com.au/xmlapi/payment'));
-		$c->setRawData($xmlRequest);
-		/** @var string $xmlResponse */
-		$xmlResponse = $c->request(\Zend_Http_Client::POST)->getBody();
-		/** @var X $xResponse */
-		$xResponse = df_xml_parse($xmlResponse);
+		$c->setRawData($xA);
+		/** @var string $xB */
+		$xB = $c->request(\Zend_Http_Client::POST)->getBody();
+		/** @var string $xAL */
+		$xAL = df_xml_prettify(str_replace($s->transactionPassword(), '*****', $xA));
+		/** @var string $xBL */
+		$xBL = df_xml_prettify($xB);
+		$this->m()->iiaSetTRR([$xAL, $xBL]);
+		/** @var X $xxB */
+		$xxB = df_xml_parse($xB);
+		/** @var X $status */
+		$status = $xxB->{'Status'};
 		/** @var string $code */
-		$code = df_leaf_sne($xResponse->{'Status'}->{'statusCode'});
+		$code = df_leaf_sne($status->{'statusCode'});
+		/** @var $errorMessage */
+		$errorMessage = null;
 		if ('000' !== $code) {
 			/** @var string $message */
-			$message = df_leaf_sne($xResponse->{'Status'}->{'statusDescription'});
-			df_error($message);
+			$errorMessage = df_leaf_sne($status->{'statusDescription'});
+		}
+		/**
+		 * 2016-09-01
+		 * При повторной попытке возврата SecurePay всё равно возвращает:
+			<Status>
+				<statusCode>000</statusCode>
+				<statusDescription>Normal</statusDescription>
+			</Status>
+		 */
+		else {
+			$errorMessage = df_leaf_sne(
+				$xxB->{'Payment'}->{'TxnList'}->{'Txn'}->{'thinlinkEventStatusText'}
+			);
+		}
+		if ($errorMessage) {
+			/**
+			 * 2016-09-01
+			 * Из-за бага в ядре исключительная ситуация при refund не только не логируется,
+			 * а и вообще теряется. Поэтому мы и логируем её сами.
+			 */
+			/** @var string $code */
+			$code = dfp_method_code($this);
+			/** @var string $namePrefix */
+			$namePrefix = "mage2.pro/{$code}-{date}--{time}--";
+			df_report("{$namePrefix}request.log", $xAL);
+			df_report("{$namePrefix}response.log", $xBL);
+			df_error($errorMessage);
 		}
 	}
 
