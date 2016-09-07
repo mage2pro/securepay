@@ -7,14 +7,13 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /** @method Method m() */
 final class Refund extends \Df\Payment\R\Refund {
 	/**
-	 * 2016-08-31
+	 * 2016-09-07
 	 * @override
-	 * @see \Df\Payment\Operation::amount()
-	 * @return float
+	 * @see \Df\Payment\Operation::formatAmount()
+	 * @param float $amount
+	 * @return int
 	 */
-	protected function amount() {return dfc($this, function() {return
-		$this->m()->adjustAmount(parent::amount());
-	});}
+	protected function formatAmount($amount) {return round(100 * parent::formatAmount($amount));}
 
 	/**
 	 * 2016-08-31
@@ -51,7 +50,7 @@ final class Refund extends \Df\Payment\R\Refund {
 					df_xml_node('Txn', ['ID' => 1], [
 						'txnType' => 4
 						,'txnSource' => 23
-						,'amount' => round(100 * $this->amount())
+						,'amount' => $this->amountF()
 						,'purchaseOrderNo' => df_cdata($this->requestP('EPS_REFERENCEID'))
 						,'txnID' => $this->responseF('txnid')
 					])
@@ -150,7 +149,7 @@ final class Refund extends \Df\Payment\R\Refund {
 	 * @return array(string, array(string => mixed))
 	 */
 	public static function p(Method $method) {
-		/** @var self $i */
+		/** @var Refund $i */
 		$i = new static([self::$P__METHOD => $method]);
 		$i->process();
 		return [$i->cm()->getIncrementId(), []];

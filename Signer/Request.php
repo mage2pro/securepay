@@ -1,7 +1,6 @@
 <?php
 // 2016-08-26
 namespace Dfe\SecurePay\Signer;
-use Dfe\SecurePay\Settings as S;
 final class Request extends \Dfe\SecurePay\Signer {
 	/**
 	 * 2016-08-27

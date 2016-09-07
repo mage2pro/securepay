@@ -1,13 +1,9 @@
 <?php
 // 2016-08-28
 namespace Dfe\SecurePay\Block;
-use Dfe\SecurePay\Method;
 use Dfe\SecurePay\Response as R;
 use Magento\Framework\DataObject;
-/**
- * @method Method method()
- * @method R|string|null responseF(string $key = null)
- */
+/** @method R|string|null responseF(string $key = null) */
 class Info extends \Df\Payment\R\BlockInfo {
 	/**
 	 * 2016-08-28
@@ -28,5 +24,3 @@ class Info extends \Df\Payment\R\BlockInfo {
 		return $result;
 	}
 }
-
-

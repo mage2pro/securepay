@@ -1,6 +1,6 @@
 // 2016-08-25
 define ([
-	'df', 'Df_Core/js/redirectWithPost', 'Df_Payment/card', 'jquery'
+	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/card', 'jquery'
 ], function(df, redirectWithPost, parent, $) {'use strict'; return parent.extend({
 	/**
 	 * 2016-08-26
@@ -31,23 +31,26 @@ define ([
 		var result;
 		if (!needAdjust) {
 			result = df.t(
-				'The transaction will be <b>{result}</b>, because the payment amount ends with «<b>{last2}</b>».'
+				'The transaction will be <b>{result}</b>, because the payment amount (<b>{amount}</b>) in the payment currency (<b>{currency}</b>) ends with «<b>{last2}</b>».'
 				,{
-					last2: this.amountLast2()
+					amount: this.amountPF()
+					,currency: this.paymentCurrency().name
+					,last2: this.amountLast2()
 					,result: label(approved)
 				}
 			);
 		}
 		else {
 			/** @type {Number} */
-			var currentA = this.dfc.grandTotal();
+			var currentA = this.amountP();
 			/** @type {Number} */
 			var newA = approve ? Math.round(currentA) : currentA + 0.01;
 			result = df.t(
-				'The payment amount will be adjusted from <b>{current}</b> to <b>{new}</b>, so the transaction will be <b>{result}</b>.'
+				'The payment amount in the payment currency (<b>{currency}</b>) will be adjusted from <b>{current}</b> to <b>{new}</b> for the transaction to be <b>{result}</b>.'
 				,{
-					current: this.dfc.formatMoney(currentA)
-					,'new': this.dfc.formatMoney(newA)
+					currency: this.paymentCurrency().name
+					,current: this.amountPF()
+					,'new': this.formatP(newA)
 					,result: label(approve)
 				}
 			);

@@ -13,11 +13,5 @@ class ForceResult extends \Df\Config\SourceT {
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	protected function map() {
-		return [
-			'no' => 'No'
-			,'approve' => 'Approve'
-			,'decline' => 'Decline'
-		];
-	}
+	protected function map() {return ['no' => 'No', 'approve' => 'Approve', 'decline' => 'Decline'];}
 }

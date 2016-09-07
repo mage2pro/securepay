@@ -2,34 +2,9 @@
 // 2016-08-25
 namespace Dfe\SecurePay;
 use Magento\Sales\Model\Order\Creditmemo as CM;
-use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /** @method Response|null responseF(string $key = null) */
 class Method extends \Df\Payment\R\Method {
-	/**
-	 * 2016-08-31
-	 * @param float $result
-	 * @return float
-	 */
-	public function adjustAmount($result) {
-		if ($this->s()->test()) {
-			/** @var string $forceResult */
-			$forceResult = $this->s()->forceResult();
-			/** @var string $amountLast2 */
-			$amountLast2 = dfp_last2($result);
-			/** @var bool $approved */
-			$approved = in_array($amountLast2, ['00', '08', '11', '16']);
-			/** @var bool $approve */
-			$approve = 'approve' === $forceResult;
-			/** @var bool $needAdjust */
-			$needAdjust = ('no' !== $forceResult) && ($approve !== $approved);
-			if ($needAdjust) {
-				$result = $approve ? round($result) : $result + 0.01;
-			}
-		}
-		return $result;
-	}
-
 	/**
 	 * 2016-08-28
 	 * @override
@@ -37,6 +12,32 @@ class Method extends \Df\Payment\R\Method {
 	 * @return bool
 	 */
 	public function canRefund() {return true;}
+
+	/**
+	 * 2016-08-31
+	 * @override
+	 * @see \Df\Payment\Method::formatAmount()
+	 * @param float $amount
+	 * @return float
+	 */
+	public function formatAmount($amount) {
+		if ($this->s()->test()) {
+			/** @var string $forceResult */
+			$forceResult = $this->s()->forceResult();
+			/** @var string $amountLast2 */
+			$amountLast2 = dfp_last2($amount);
+			/** @var bool $approved */
+			$approved = in_array($amountLast2, ['00', '08', '11', '16']);
+			/** @var bool $approve */
+			$approve = 'approve' === $forceResult;
+			/** @var bool $needAdjust */
+			$needAdjust = ('no' !== $forceResult) && ($approve !== $approved);
+			if ($needAdjust) {
+				$amount = $approve ? round($amount) : $amount + 0.01;
+			}
+		}
+		return $amount;
+	}
 
 	/**
 	 * 2016-08-27

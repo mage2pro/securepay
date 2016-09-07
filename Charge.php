@@ -23,14 +23,19 @@ class Charge extends \Df\Payment\R\Charge {
 	public static function requestIdKey() {return 'EPS_REFERENCEID';}
 
 	/**
-	 * 2016-08-26
+	 * 2016-09-07
 	 * @override
-	 * @see \Df\Payment\Operation::amount()
-	 * @return float
+	 * @see \Df\Payment\Operation::formatAmount()
+	 * 2016-08-26
+	 * «5.1.1.2 Transaction Amount».
+	 * Mandatory
+	 * Numeric, two decimal places, from 0.01 to 99999999.99
+	 * «The total amount of the purchase transaction.
+	 * By default the currency is AUD (Australian Dollars).»
+	 * @param float $amount
+	 * @return string
 	 */
-	protected function amount() {return dfc($this, function() {return
-		$this->m()->adjustAmount(parent::amount());
-	});}
+	protected function formatAmount($amount) {return df_2f(parent::formatAmount($amount));}
 
 	/**
 	 * 2016-08-26
@@ -50,7 +55,7 @@ class Charge extends \Df\Payment\R\Charge {
 		 * Any ASCII characters may be used to build this string.
 		 * E.g. May comprise of a timestamp padded with 0s for uniqueness: "20110714112034872000".»
 		 */
-		'3D_XID' => str_pad($this->o()->getIncrementId(), 20, '0')
+		'3D_XID' => str_pad($this->oii(), 20, '0')
 		/**
 		 * 2016-08-26
 		 * «5.1.1.2 Transaction Amount».
@@ -59,14 +64,14 @@ class Charge extends \Df\Payment\R\Charge {
 		 * «The total amount of the purchase transaction.
 		 * By default the currency is AUD (Australian Dollars).»
 		 */
-		,'EPS_AMOUNT' => df_2f($this->amount())
+		,'EPS_AMOUNT' => $this->amountF()
 		/**
 		 * 2016-08-26
 		 * Optional
 		 * String, length 2, ISO 4217 currency code
 		 * «Payee’s Country two letter code»
 		 */
-		,'EPS_BILLINGCOUNTRY' => $this->o()->getBillingAddress()->getCountryId()
+		,'EPS_BILLINGCOUNTRY' => $this->addressB()->getCountryId()
 		/**
 		 * 2016-08-27
 		 * Если этот параметр указан, то система передаёт сюда те же параметры, что и на EPS_RESULTURL.
@@ -93,7 +98,7 @@ class Charge extends \Df\Payment\R\Charge {
 		 * that accepts currencies other than AUD before using this feature.
 		 * Set the currency to any ISO 4217 three letter currency code. E.g. USD, NZD, GBP, etc.»
 		 */
-		,'EPS_CURRENCY' => $this->currencyCode()
+		,'EPS_CURRENCY' => $this->currencyC()
 		/**
 		 * 2016-08-26
 		 * Optional

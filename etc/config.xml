@@ -14,6 +14,7 @@
 					чтобы галка была установлена для чекбокса.
 				-->
 				<askForBillingAddress>1</askForBillingAddress>
+				<currency>order</currency>
                 <forceResult>approve</forceResult>
 				<!--
 					2016-08-26
