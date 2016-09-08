@@ -9,11 +9,11 @@ final class Refund extends \Df\Payment\R\Refund {
 	/**
 	 * 2016-09-07
 	 * @override
-	 * @see \Df\Payment\Operation::formatAmount()
+	 * @see \Df\Payment\Operation::amountFormat()
 	 * @param float $amount
 	 * @return int
 	 */
-	protected function formatAmount($amount) {return round(100 * parent::formatAmount($amount));}
+	protected function amountFormat($amount) {return round(100 * parent::amountFormat($amount));}
 
 	/**
 	 * 2016-08-31
@@ -121,12 +121,8 @@ final class Refund extends \Df\Payment\R\Refund {
 			 * Из-за бага в ядре исключительная ситуация при refund не только не логируется,
 			 * а и вообще теряется. Поэтому мы и логируем её сами.
 			 */
-			/** @var string $code */
-			$code = dfp_method_code($this);
-			/** @var string $namePrefix */
-			$namePrefix = "mage2.pro/{$code}-{date}--{time}--";
-			df_report("{$namePrefix}request.log", $xAL);
-			df_report("{$namePrefix}response.log", $xBL);
+			dfp_report($this, $xAL, 'request');
+			dfp_report($this, $xBL, 'response');
 			df_error($errorMessage);
 		}
 	}

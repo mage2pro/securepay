@@ -5,6 +5,21 @@ use Dfe\SecurePay\Settings as S;
 /** @method Method m() */
 class Charge extends \Df\Payment\R\Charge {
 	/**
+	 * 2016-09-07
+	 * @override
+	 * @see \Df\Payment\Operation::amountFormat()
+	 * 2016-08-26
+	 * «5.1.1.2 Transaction Amount».
+	 * Mandatory
+	 * Numeric, two decimal places, from 0.01 to 99999999.99
+	 * «The total amount of the purchase transaction.
+	 * By default the currency is AUD (Australian Dollars).»
+	 * @param float $amount
+	 * @return string
+	 */
+	protected function amountFormat($amount) {return df_2f(parent::amountFormat($amount));}
+
+	/**
 	 * 2016-08-29
 	 * 2016-08-26
 	 * «5.1.1.4 Payment Reference».
@@ -21,21 +36,6 @@ class Charge extends \Df\Payment\R\Charge {
 	 * @return string
 	 */
 	public static function requestIdKey() {return 'EPS_REFERENCEID';}
-
-	/**
-	 * 2016-09-07
-	 * @override
-	 * @see \Df\Payment\Operation::formatAmount()
-	 * 2016-08-26
-	 * «5.1.1.2 Transaction Amount».
-	 * Mandatory
-	 * Numeric, two decimal places, from 0.01 to 99999999.99
-	 * «The total amount of the purchase transaction.
-	 * By default the currency is AUD (Australian Dollars).»
-	 * @param float $amount
-	 * @return string
-	 */
-	protected function formatAmount($amount) {return df_2f(parent::formatAmount($amount));}
 
 	/**
 	 * 2016-08-26

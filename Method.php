@@ -6,21 +6,13 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 /** @method Response|null responseF(string $key = null) */
 class Method extends \Df\Payment\R\Method {
 	/**
-	 * 2016-08-28
-	 * @override
-	 * @see \Df\Payment\Method::canRefund()
-	 * @return bool
-	 */
-	public function canRefund() {return true;}
-
-	/**
 	 * 2016-08-31
 	 * @override
-	 * @see \Df\Payment\Method::formatAmount()
+	 * @see \Df\Payment\Method::amountFormat()
 	 * @param float $amount
 	 * @return float
 	 */
-	public function formatAmount($amount) {
+	public function amountFormat($amount) {
 		if ($this->s()->test()) {
 			/** @var string $forceResult */
 			$forceResult = $this->s()->forceResult();
@@ -38,6 +30,14 @@ class Method extends \Df\Payment\R\Method {
 		}
 		return $amount;
 	}
+
+	/**
+	 * 2016-08-28
+	 * @override
+	 * @see \Df\Payment\Method::canRefund()
+	 * @return bool
+	 */
+	public function canRefund() {return true;}
 
 	/**
 	 * 2016-08-27
