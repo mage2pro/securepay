@@ -17,7 +17,7 @@ class Charge extends \Df\Payment\R\Charge {
 	 * @param float $amount
 	 * @return string
 	 */
-	protected function amountFormat($amount) {return df_2f(parent::amountFormat($amount));}
+	protected function amountFormat($amount) {return df_f2(parent::amountFormat($amount));}
 
 	/**
 	 * 2016-08-29
