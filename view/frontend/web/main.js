@@ -10,7 +10,7 @@ define ([
 	 * the transaction will be approved once card details are submitted.
 	 * All other options will cause a declined transaction.»
 	 * @override
-	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
+	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
 	 * @returns {String}
 	 */
 	debugMessage: df.c(function() {
@@ -87,7 +87,7 @@ define ([
 	/**
 	 * 2016-08-26
 	 * @override
-	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
+	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
 	 * @used-by placeOrderInternal()
 	 */
 	onSuccess: function(json) {
