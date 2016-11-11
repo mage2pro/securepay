@@ -1,5 +1,5 @@
 // 2016-08-25
-define ([
+define([
 	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/card', 'jquery'
 ], function(df, redirectWithPost, parent, $) {'use strict'; return parent.extend({
 	/**
@@ -65,7 +65,7 @@ define ([
 	getCardTypes: function() {return ['VI', 'MC'];},
 	/**
 	 * 2016-08-26
-	 * @return {Object}
+	 * @returns {Object}
 	*/
 	initialize: function() {
 		this._super();
