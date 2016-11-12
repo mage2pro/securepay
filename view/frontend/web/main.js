@@ -95,10 +95,10 @@ define([
 		var data = $.parseJSON(json);
 		// @see \Dfe\SecurePay\Method::getConfigPaymentAction()
 		redirectWithPost(data.uri, df.o.merge(data.params, {
-			EPS_CCV: this.dfCardVerification()
-			,EPS_EXPIRYYEAR: this.dfCardExpirationYear()
-			,EPS_CARDNUMBER: this.dfCardNumber()
-			,EPS_EXPIRYMONTH: this.dfCardExpirationMonth()
+			EPS_CCV: this.creditCardVerificationNumber()
+			,EPS_EXPIRYYEAR: this.creditCardExpYear()
+			,EPS_CARDNUMBER: this.creditCardNumber()
+			,EPS_EXPIRYMONTH: this.creditCardExpMonth()
 		}));
 	},
 	/**
