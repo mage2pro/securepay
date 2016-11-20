@@ -38,7 +38,7 @@
 					showInStore='1'
                 >
                     <label>Enable?</label>
-					<backend_model>Df\Framework\Form\Element\Enable\Backend</backend_model>
+					<backend_model>Df\Config\Backend\Checkbox</backend_model>
                     <comment><![CDATA[Enable the «<a href='https://mage2.pro/c/extensions/securepay' target='_blank'>SecurePay</a>» payment extension?]]></comment>
                 </field>
 				<field
