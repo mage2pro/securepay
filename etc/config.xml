@@ -16,6 +16,8 @@
 				<askForBillingAddress>1</askForBillingAddress>
 				<currency>order</currency>
                 <forceResult>approve</forceResult>
+				<!-- 2016-12-20 -->
+				<logConfirmations>1</logConfirmations>
 				<!--
 					2016-08-26
 					«Secure XML API Integration Guide»
