@@ -20,13 +20,10 @@ class Response extends \Df\Payment\R\Response {
 
 	/**
 	 * 2016-08-29
-	 * Потомки перекрывают этот метод, когда ключ идентификатора запроса в запросе
-	 * не совпадает с ключем идентификатора запроса в ответе.
-	 * Так, в частности, происходит в модуле SecurePay: @see \Dfe\SecurePay\Charge::requestIdKey()
 	 * @override
-	 * @see \Df\Payment\Webhook\Response::requestIdKey()
-	 * @used-by \Df\Payment\Webhook\Response::requestId()
+	 * @see \Df\Payment\Webhook\Response::parentIdKey()
+	 * @used-by \Df\Payment\Webhook\Response::parentId()
 	 * @return string
 	 */
-	protected function requestIdKey() {return 'refid';}
+	protected function parentIdKey() {return 'refid';}
 }
