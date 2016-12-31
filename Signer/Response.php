@@ -27,5 +27,5 @@ final class Response extends \Dfe\SecurePay\Signer {
 	 * @param string $p
 	 * @return string|null
 	 */
-	private function req($p) {return $this->caller()->requestP($p);}
+	private function req($p) {return $this->caller()->parentInfo($p);}
 }
