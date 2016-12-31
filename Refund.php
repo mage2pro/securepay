@@ -5,7 +5,7 @@ use Df\Xml\X;
 use Dfe\SecurePay\Settings as S;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /** @method Method m() */
-final class Refund extends \Df\Payment\R\Refund {
+final class Refund extends \Df\PaypalClone\Refund {
 	/**
 	 * 2016-09-07
 	 * @override
@@ -19,7 +19,7 @@ final class Refund extends \Df\Payment\R\Refund {
 	 * 2016-08-31
 	 * Первый параметр — для test, второй — для live.
 	 * @override
-	 * @see \Df\Payment\R\Refund::stageNames()
+	 * @see \Df\PaypalClone\Refund::stageNames()
 	 * @return string[]
 	 */
 	protected function stageNames() {return ['test', 'api'];}

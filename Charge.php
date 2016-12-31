@@ -3,7 +3,7 @@
 namespace Dfe\SecurePay;
 use Dfe\SecurePay\Settings as S;
 /** @method Method m() */
-class Charge extends \Df\Payment\R\Charge {
+class Charge extends \Df\PaypalClone\Charge {
 	/**
 	 * 2016-09-07
 	 * @override
@@ -30,8 +30,8 @@ class Charge extends \Df\Payment\R\Charge {
 	 * This field is typically a shopping cart id or invoice number
 	 * and is used to match the SecurePay transaction to your application.»
 	 * @override
-	 * @see \Df\Payment\R\ICharge::requestIdKey()
-	 * @used-by \Df\Payment\R\Charge::p()
+	 * @see \Df\PaypalClone\ICharge::requestIdKey()
+	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\Payment\Webhook::requestId()
 	 * @return string
 	 */
@@ -40,8 +40,8 @@ class Charge extends \Df\Payment\R\Charge {
 	/**
 	 * 2016-08-26
 	 * @override
-	 * @see \Df\Payment\R\Charge::params()
-	 * @used-by \Df\Payment\R\Charge::p()
+	 * @see \Df\PaypalClone\Charge::params()
+	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @return array(string => mixed)
 	 */
 	protected function params() {$s = S::s(); return [
@@ -277,8 +277,8 @@ class Charge extends \Df\Payment\R\Charge {
 	/**
 	 * 2016-08-27
 	 * @override
-	 * @see \Df\Payment\R\Charge::signatureKey()
-	 * @used-by \Df\Payment\R\Charge::p()
+	 * @see \Df\PaypalClone\Charge::signatureKey()
+	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @return string
 	 */
 	protected function signatureKey() {return 'EPS_FINGERPRINT';}

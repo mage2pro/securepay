@@ -3,7 +3,7 @@
 namespace Dfe\SecurePay\Block;
 use Dfe\SecurePay\Webhook as W;
 /** @method W|string|null responseF(string $key = null) */
-class Info extends \Df\Payment\R\BlockInfo {
+class Info extends \Df\PaypalClone\BlockInfo {
 	/**
 	 * 2016-08-28
 	 * @override
