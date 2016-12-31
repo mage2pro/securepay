@@ -1,12 +1,12 @@
 <?php
 // 2016-08-27
 namespace Dfe\SecurePay;
-class Response extends \Df\Payment\R\Response {
+class Webhook extends \Df\Payment\R\Webhook {
 	/**
 	 * 2016-08-27
 	 * @override
-	 * @see \Df\Payment\Webhook\Response::config()
-	 * @used-by \Df\Payment\Webhook\Response::configCached()
+	 * @see \Df\Payment\Webhook::config()
+	 * @used-by \Df\Payment\Webhook::configCached()
 	 * @return array(string => mixed)
 	 */
 	protected function config() {return [
@@ -21,8 +21,8 @@ class Response extends \Df\Payment\R\Response {
 	/**
 	 * 2016-08-29
 	 * @override
-	 * @see \Df\Payment\Webhook\Response::parentIdKey()
-	 * @used-by \Df\Payment\Webhook\Response::parentId()
+	 * @see \Df\Payment\Webhook::parentIdKey()
+	 * @used-by \Df\Payment\Webhook::parentId()
 	 * @return string
 	 */
 	protected function parentIdKey() {return 'refid';}

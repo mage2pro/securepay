@@ -3,7 +3,7 @@
 namespace Dfe\SecurePay;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
-/** @method Response|null responseF(string $key = null) */
+/** @method Webhook|null responseF(string $key = null) */
 class Method extends \Df\Payment\R\Method {
 	/**
 	 * 2016-08-31

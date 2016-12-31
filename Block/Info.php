@@ -1,8 +1,8 @@
 <?php
 // 2016-08-28
 namespace Dfe\SecurePay\Block;
-use Dfe\SecurePay\Response as R;
-/** @method R|string|null responseF(string $key = null) */
+use Dfe\SecurePay\Webhook as W;
+/** @method W|string|null responseF(string $key = null) */
 class Info extends \Df\Payment\R\BlockInfo {
 	/**
 	 * 2016-08-28

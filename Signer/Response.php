@@ -1,8 +1,8 @@
 <?php
 // 2016-08-27
 namespace Dfe\SecurePay\Signer;
-use Dfe\SecurePay\Response as R;
-/** @method R caller() */
+use Dfe\SecurePay\Webhook as W;
+/** @method W caller() */
 final class Response extends \Dfe\SecurePay\Signer {
 	/**
 	 * 2016-08-27
