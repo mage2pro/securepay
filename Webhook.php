@@ -1,7 +1,7 @@
 <?php
 // 2016-08-27
 namespace Dfe\SecurePay;
-class Webhook extends \Df\PaypalClone\Webhook {
+class Webhook extends \Df\PaypalClone\Confirmation {
 	/**
 	 * 2016-08-27
 	 * @override
