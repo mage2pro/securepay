@@ -9,7 +9,7 @@ class Webhook extends \Df\PaypalClone\Confirmation {
 	 * @used-by \Df\Payment\Webhook::configCached()
 	 * @return array(string => mixed)
 	 */
-	protected function config() {return [
+	final protected function config() {return [
 		self::$externalIdKey => 'txnid'
 		,self::$needCapture => true
 		,self::$readableStatusKey => 'restext'
@@ -25,5 +25,5 @@ class Webhook extends \Df\PaypalClone\Confirmation {
 	 * @used-by \Df\Payment\Webhook::parentId()
 	 * @return string
 	 */
-	protected function parentIdKey() {return 'refid';}
+	final protected function parentIdKey() {return 'refid';}
 }
