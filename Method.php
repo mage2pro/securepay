@@ -64,7 +64,7 @@ class Method extends \Df\PaypalClone\Method {
 		list($id, $p) = Refund::p($this);
 		// 2016-08-20
 		// Иначе автоматический идентификатор будет таким: <первичная транзакция>-capture-refund
-		$this->ii()->setTransactionId(self::transactionIdL2G($id));
+		$this->ii()->setTransactionId(self::e2i($id));
 		$this->iiaSetTR($p);
 	}
 

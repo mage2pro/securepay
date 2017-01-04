@@ -21,9 +21,9 @@ class Webhook extends \Df\PaypalClone\Confirmation {
 	/**
 	 * 2016-08-29
 	 * @override
-	 * @see \Df\Payment\Webhook::parentIdKey()
-	 * @used-by \Df\Payment\Webhook::parentId()
+	 * @see \Df\Payment\Webhook::parentIdLKey()
+	 * @used-by \Df\Payment\Webhook::parentIdL()
 	 * @return string
 	 */
-	final protected function parentIdKey() {return 'refid';}
+	final protected function parentIdLKey() {return 'refid';}
 }
