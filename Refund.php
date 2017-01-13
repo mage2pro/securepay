@@ -69,7 +69,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 		$xAL = df_xml_prettify(str_replace($s->transactionPassword(), '*****', $xA));
 		/** @var string $xBL */
 		$xBL = df_xml_prettify($xB);
-		$this->m()->iiaSetTRR([$xAL, $xBL]);
+		$this->m()->iiaSetTRR($xAL, $xBL);
 		/** @var X $xxB */
 		$xxB = df_xml_parse($xB);
 		/** @var X $status */
