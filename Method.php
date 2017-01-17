@@ -75,5 +75,5 @@ class Method extends \Df\PaypalClone\Method {
 	 * @see \Df\PaypalClone\Method::stageNames()
 	 * @return string
 	 */
-	protected function redirectUrl() {return 'https://api.securepay.com.au/{stage}/directpost/authorise';}
+	final protected function redirectUrl() {return 'https://api.securepay.com.au/{stage}/directpost/authorise';}
 }
