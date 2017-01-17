@@ -58,7 +58,7 @@ class Method extends \Df\PaypalClone\Method {
 	 * @param float|null $amount
 	 * @return void
 	 */
-	protected function _refund($amount) {
+	final protected function _refund($amount) {
 		/** @var string $id */
 		/** @var array(string => mixed) $p */
 		list($id, $p) = Refund::p($this);
