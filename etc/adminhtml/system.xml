@@ -130,7 +130,7 @@ SecurePay Direct Post, похоже, не работает на localhost,
 				<field
 					id='currency'
 					translate='label'
-					type='Df\Payment\FormElement\Currency'
+					type='Df\Directory\FormElement\Currency'
 					sortOrder='7'
 					showInDefault='1'
 					showInWebsite='1'
