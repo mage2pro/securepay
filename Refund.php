@@ -1,10 +1,11 @@
 <?php
-// 2016-08-30
 namespace Dfe\SecurePay;
 use Df\Xml\X;
-use Dfe\SecurePay\Settings as S;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
-/** @method Method m() */
+/**
+ * 2016-08-30
+ * @method Method m()
+ */
 final class Refund extends \Df\PaypalClone\Refund {
 	/**
 	 * 2016-09-07
@@ -13,7 +14,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 * @param float $amount
 	 * @return int
 	 */
-	protected function amountFormat($amount) {return round(100 * parent::amountFormat($amount));}
+	final protected function amountFormat($amount) {return round(100 * parent::amountFormat($amount));}
 
 	/**
 	 * 2016-08-31
@@ -23,7 +24,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 * @used-by \Df\PaypalClone\Refund::url()
 	 * @return string[]
 	 */
-	protected function stageNames() {return ['test', 'api'];}
+	final protected function stageNames() {return ['test', 'api'];}
 
 	/**
 	 * 2016-08-20
@@ -31,8 +32,8 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 * @return void
 	 */
 	private function process() {
-		/** @var S $s */
-		$s = S::s();
+		/** @var Settings $s */
+		$s = $this->ss();
 		/** @var string $xA */
 		$xA = df_xml_g('SecurePayMessage', [
 			'MessageInfo' => [
@@ -62,7 +63,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 		$c = new \Zend_Http_Client;
 		$c->setHeaders('content-type', 'text/xml');
 		$c->setConfig(['timeout' => 120]);
-		$c->setUri($this->m()->url('https://{stage}.securepay.com.au/xmlapi/payment'));
+		$c->setUri($this->url('https://{stage}.securepay.com.au/xmlapi/payment'));
 		$c->setRawData($xA);
 		/** @var string $xB */
 		$xB = $c->request(\Zend_Http_Client::POST)->getBody();

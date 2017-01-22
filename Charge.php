@@ -1,8 +1,10 @@
 <?php
-// 2016-08-26
 namespace Dfe\SecurePay;
-use Dfe\SecurePay\Settings as S;
-/** @method Method m() */
+/**
+ * 2016-08-26
+ * @method Method m()
+ * @method Settings ss()
+ */
 class Charge extends \Df\PaypalClone\Charge {
 	/**
 	 * 2016-09-07
@@ -44,7 +46,7 @@ class Charge extends \Df\PaypalClone\Charge {
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @return array(string => mixed)
 	 */
-	protected function params() {$s = S::s(); return [
+	protected function params() {$s = $this->ss(); return [
 		/**
 		 * 2016-08-26
 		 * Mandatory when EPS_TXNTYPE includes 3D Secure
