@@ -19,7 +19,8 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 * 2016-08-31
 	 * Первый параметр — для test, второй — для live.
 	 * @override
-	 * @see \Df\PaypalClone\Refund::stageNames()
+	 * @see \Df\PaypalClone\Refund::stageNames()  
+	 * @used-by \Df\PaypalClone\Refund::url()
 	 * @return string[]
 	 */
 	protected function stageNames() {return ['test', 'api'];}
