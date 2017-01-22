@@ -4,7 +4,7 @@ namespace Dfe\SecurePay;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /** @method Webhook|null responseF(string $key = null) */
-class Method extends \Df\PaypalClone\Method {
+class Method extends \Df\PaypalClone\Method\Normal {
 	/**
 	 * 2016-08-31
 	 * @override
@@ -43,8 +43,8 @@ class Method extends \Df\PaypalClone\Method {
 	 * 2016-08-27
 	 * Первый параметр — для test, второй — для live.
 	 * @override
-	 * @see \Df\PaypalClone\Method::stageNames()
-	 * @used-by \Df\PaypalClone\Method::url()
+	 * @see \Df\PaypalClone\Method\Normal::stageNames()
+	 * @used-by \Df\PaypalClone\Method\Normal::url()
 	 * @used-by \Df\PaypalClone\Refund::stageNames()
 	 * @return string[]
 	 */
@@ -70,10 +70,12 @@ class Method extends \Df\PaypalClone\Method {
 
 	/**
 	 * 2016-08-27
-	 * @used-by \Df\PaypalClone\Method::getConfigPaymentAction()
 	 * @override
-	 * @see \Df\PaypalClone\Method::stageNames()
+	 * @see \Df\PaypalClone\Method\Normal::redirectUrl()
+	 * @used-by \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
 	 * @return string
 	 */
-	final protected function redirectUrl() {return 'https://api.securepay.com.au/{stage}/directpost/authorise';}
+	final protected function redirectUrl() {return
+		'https://api.securepay.com.au/{stage}/directpost/authorise'
+	;}
 }
