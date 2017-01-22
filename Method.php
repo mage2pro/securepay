@@ -13,7 +13,7 @@ class Method extends \Df\PaypalClone\Method {
 	 * @return float
 	 */
 	public function amountFormat($amount) {
-		if ($this->s()->test()) {
+		if ($this->test()) {
 			/** @var string $forceResult */
 			$forceResult = $this->s()->forceResult();
 			/** @var string $amountLast2 */
