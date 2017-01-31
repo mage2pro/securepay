@@ -5,7 +5,7 @@ namespace Dfe\SecurePay;
  * @method Method m()
  * @method Settings ss()
  */
-class Charge extends \Df\PaypalClone\Charge {
+final class Charge extends \Df\PaypalClone\Charge {
 	/**
 	 * 2016-09-07
 	 * @override
