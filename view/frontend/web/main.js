@@ -59,7 +59,9 @@ define([
 	}),
 	/**
 	 * 2016-08-25
-	 * https://mage2.pro/t/1989
+	 * Which bank card networks does SecurePay support? https://mage2.pro/t/1989
+	 * 2017-02-05
+	 * The bank card network codes: https://mage2.pro/t/2647
 	 * @returns {String[]}
 	 */
 	getCardTypes: function() {return ['VI', 'MC'];},
