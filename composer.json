@@ -14,14 +14,20 @@
 	,"require": {"mage2pro/core": "^1.12.3"}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Dfe\\SecurePay\\": ""}}
 	,"keywords": [
-		"api"
-		,"australia"
-		,"bank card"
-		,"ecommerce"
-		,"magento"
-		,"magento 2"
-		,"magento extension"
-		,"payment"
-		,"securepay"
+		"3D Secure"
+		,"API"
+		,"Australia"
+		,"Bank card"
+		,"Credit card"
+		,"eCommerce"
+		,"Magento"
+		,"Magento 2"
+		,"Magento extension"
+		,"Payment"
+		,"Payment authorization"
+		,"Payment integration"
+		,"Payment gateway"
+		,"Refund"
+		,"SecurePay"
 	]
 }
