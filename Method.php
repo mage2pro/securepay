@@ -4,7 +4,7 @@ namespace Dfe\SecurePay;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /** @method Webhook|null responseF(string $key = null) */
-class Method extends \Df\PaypalClone\Method\Normal {
+final class Method extends \Df\PaypalClone\Method\Normal {
 	/**
 	 * 2016-08-31
 	 * @override
@@ -58,7 +58,7 @@ class Method extends \Df\PaypalClone\Method\Normal {
 	 * @param float|null $amount
 	 * @return void
 	 */
-	final protected function _refund($amount) {
+	protected function _refund($amount) {
 		/** @var string $id */
 		/** @var array(string => mixed) $p */
 		list($id, $p) = Refund::p($this);
@@ -75,7 +75,7 @@ class Method extends \Df\PaypalClone\Method\Normal {
 	 * @used-by \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
 	 * @return string
 	 */
-	final protected function redirectUrl() {return
+	protected function redirectUrl() {return
 		'https://api.securepay.com.au/{stage}/directpost/authorise'
 	;}
 }
