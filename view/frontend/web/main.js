@@ -50,7 +50,7 @@ define([
 				,{
 					currency: this.paymentCurrency().name
 					,current: this.amountPF()
-					,'new': this.formatP(newA)
+					,'new': this.formatAmountForDisplay(newA)
 					,result: label(approve)
 				}
 			);
