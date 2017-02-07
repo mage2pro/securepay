@@ -6,7 +6,7 @@ final class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	/**
 	 * 2016-08-25
 	 * @override
-	 * @see \Df\Payment\ConfigProvider::config()
+	 * @see \Df\Payment\ConfigProvider\BankCard::config()
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
 	 * @return array(string => mixed)
 	 */
