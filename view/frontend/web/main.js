@@ -33,7 +33,7 @@ define([
 			result = df.t(
 				'The transaction will be <b>{result}</b>, because the payment amount (<b>{amount}</b>) in the payment currency (<b>{currency}</b>) ends with «<b>{last2}</b>».'
 				,{
-					amount: this.amountPF()
+					amount: this.amountPD()
 					,currency: this.paymentCurrency().name
 					,last2: this.amountLast2()
 					,result: label(approved)
@@ -49,7 +49,7 @@ define([
 				'The payment amount in the payment currency (<b>{currency}</b>) will be adjusted from <b>{current}</b> to <b>{new}</b> for the transaction to be <b>{result}</b>.'
 				,{
 					currency: this.paymentCurrency().name
-					,current: this.amountPF()
+					,current: this.amountPD()
 					,'new': this.formatAmountForDisplay(newA)
 					,result: label(approve)
 				}
