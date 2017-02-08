@@ -69,6 +69,20 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 	}
 
 	/**
+	 * 2017-02-08
+	 * @override
+	 * Результат — в рублях, не в копейках.
+	 * I did not find such information on the SecurePay website.
+	 * «Does SecurePay have minimum and maximum amount limitations on a single payment?»
+	 * https://mage2.pro/t/2693
+	 * https://mail.google.com/mail/u/0/#sent/15a1f5d2ca41fb90
+	 * @see \Df\Payment\Method::amountLimits()
+	 * @used-by \Df\Payment\Method::isAvailable()
+	 * @return null
+	 */
+	protected function amountLimits() {return null;}
+
+	/**
 	 * 2016-08-27
 	 * @override
 	 * @see \Df\PaypalClone\Method\Normal::redirectUrl()
