@@ -12,7 +12,7 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 	 * @param float $amount
 	 * @return float
 	 */
-	public function amountFormat($amount) {
+	function amountFormat($amount) {
 		if ($this->test()) {
 			/** @var string $forceResult */
 			$forceResult = $this->s()->forceResult();
@@ -37,7 +37,7 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 	 * @see \Df\Payment\Method::canRefund()
 	 * @return bool
 	 */
-	public function canRefund() {return true;}
+	function canRefund() {return true;}
 
 	/**
 	 * 2016-08-27
@@ -48,7 +48,7 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 	 * @used-by \Df\PaypalClone\Refund::stageNames()
 	 * @return string[]
 	 */
-	public function stageNames() {return ['test', 'live'];}
+	function stageNames() {return ['test', 'live'];}
 
 	/**
 	 * 2016-08-30
