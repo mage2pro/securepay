@@ -146,7 +146,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 * @param Method $method
 	 * @return array(string, array(string => mixed))
 	 */
-	public static function p(Method $method) {
+	static function p(Method $method) {
 		/** @var Refund $i */
 		$i = new static([self::$P__METHOD => $method]);
 		$i->process();

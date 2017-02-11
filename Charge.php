@@ -37,7 +37,7 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * @used-by \Df\PaypalClone\Webhook::parentIdRawKey()
 	 * @return string
 	 */
-	public static function requestIdKey() {return 'EPS_REFERENCEID';}
+	static function requestIdKey() {return 'EPS_REFERENCEID';}
 
 	/**
 	 * 2016-08-26
