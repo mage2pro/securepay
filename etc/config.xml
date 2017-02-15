@@ -1,9 +1,9 @@
 <?xml version='1.0'?>
 <config
-    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xsi:noNamespaceSchemaLocation='urn:magento:module:Magento_Store:etc/config.xsd'
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:module:Magento_Store:etc/config.xsd'
 >
-    <default>
+	<default>
 		<df_payment>
 			<secure_pay>
 				<!--
@@ -15,7 +15,7 @@
 				-->
 				<askForBillingAddress>1</askForBillingAddress>
 				<currency>order</currency>
-                <forceResult>approve</forceResult>
+				<forceResult>approve</forceResult>
 				<log>1</log>
 				<!--
 					2016-08-26
@@ -25,16 +25,16 @@
 					https://mage2.pro/t/1976/11
 					https://www.concrete5.org/marketplace/addons/ecommerce-securepay-direct-post-redirect-payment-method/documentation
 				-->
-                <testMerchantID>ABC0001</testMerchantID>
+				<testMerchantID>ABC0001</testMerchantID>
 				<testTransactionPassword>abc123</testTransactionPassword>
 				<title>Bank Card</title>
 				<title_backend>SecurePay</title_backend>
 			</secure_pay>
 		</df_payment>
-        <payment>
-            <dfe_secure_pay>
+		<payment>
+			<dfe_secure_pay>
 				<model>Dfe\SecurePay\Method</model>
-            </dfe_secure_pay>
-        </payment>
-    </default>
+			</dfe_secure_pay>
+		</payment>
+	</default>
 </config>
