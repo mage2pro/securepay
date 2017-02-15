@@ -42,13 +42,15 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 	/**
 	 * 2016-08-27
 	 * Первый параметр — для test, второй — для live.
+	 * 2017-02-16
+	 * SecurePay has changed the URL for Direct Post API testing: https://mage2.pro/t/2779
 	 * @override
 	 * @see \Df\PaypalClone\Method\Normal::stageNames()
 	 * @used-by \Df\PaypalClone\Method\Normal::url()
 	 * @used-by \Df\PaypalClone\Refund::stageNames()
 	 * @return string[]
 	 */
-	function stageNames() {return ['test', 'live'];}
+	function stageNames() {return ['test.', ''];}
 
 	/**
 	 * 2016-08-30
@@ -84,12 +86,14 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 
 	/**
 	 * 2016-08-27
+	 * 2017-02-16
+	 * SecurePay has changed the URL for Direct Post API testing: https://mage2.pro/t/2779
 	 * @override
 	 * @see \Df\PaypalClone\Method\Normal::redirectUrl()
 	 * @used-by \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
 	 * @return string
 	 */
 	protected function redirectUrl() {return
-		'https://api.securepay.com.au/{stage}/directpost/authorise'
+		'https://{stage}api.securepay.com.au/live/directpost/authorise'
 	;}
 }
