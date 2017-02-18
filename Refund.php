@@ -11,10 +11,11 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 * 2016-09-07
 	 * @override
 	 * @see \Df\Payment\Operation::amountFormat()
+	 * @used-by \Df\Payment\Operation::amountF()
 	 * @param float $amount
 	 * @return int
 	 */
-	final protected function amountFormat($amount) {return round(100 * parent::amountFormat($amount));}
+	protected function amountFormat($amount) {return round(100 * parent::amountFormat($amount));}
 
 	/**
 	 * 2016-08-31
@@ -24,7 +25,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 * @used-by \Df\PaypalClone\Refund::url()
 	 * @return string[]
 	 */
-	final protected function stageNames() {return ['test', 'api'];}
+	protected function stageNames() {return ['test', 'api'];}
 
 	/**
 	 * 2016-08-20

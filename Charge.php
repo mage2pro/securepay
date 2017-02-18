@@ -10,6 +10,7 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * 2016-09-07
 	 * @override
 	 * @see \Df\Payment\Operation::amountFormat()
+	 * @used-by \Df\Payment\Operation::amountF()
 	 * 2016-08-26
 	 * «5.1.1.2 Transaction Amount».
 	 * Mandatory

@@ -1,8 +1,11 @@
 <?php
-// 2016-08-28
 namespace Dfe\SecurePay\Block;
 use Dfe\SecurePay\Webhook as W;
-/** @method W|string|null responseF(string $key = null) */
+/**
+ * 2016-08-28
+ * @final
+ * @method W|string|null responseF(string $key = null)
+ */
 class Info extends \Df\PaypalClone\BlockInfo {
 	/**
 	 * 2016-08-28
