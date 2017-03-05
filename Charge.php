@@ -25,11 +25,11 @@ final class Charge extends \Df\PaypalClone\Charge {
 	/**
 	 * 2016-08-26
 	 * @override
-	 * @see \Df\PaypalClone\Charge::params()
+	 * @see \Df\PaypalClone\Charge::pCharge()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @return array(string => mixed)
 	 */
-	protected function params() {$s = $this->ss(); return [
+	protected function pCharge() {$s = $this->ss(); return [
 		// 2016-08-26
 		// Mandatory when EPS_TXNTYPE includes 3D Secure
 		// String, length 20
