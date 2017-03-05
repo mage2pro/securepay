@@ -33,7 +33,7 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * This field is typically a shopping cart id or invoice number
 	 * and is used to match the SecurePay transaction to your application.»
 	 * @override
-	 * @see \Df\PaypalClone\ICharge::requestIdKey()
+	 * @see \Df\PaypalClone\Charge\IRequestIdKey::requestIdKey()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\PaypalClone\Webhook::parentIdRawKey()
 	 * @return string
