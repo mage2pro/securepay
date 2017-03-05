@@ -1,7 +1,7 @@
 <?php
 // 2016-08-27
 namespace Dfe\SecurePay;
-class Webhook extends \Df\PaypalClone\Confirmation {
+final class Webhook extends \Df\PaypalClone\Confirmation {
 	/**
 	 * 2016-08-27
 	 * @override
@@ -9,7 +9,7 @@ class Webhook extends \Df\PaypalClone\Confirmation {
 	 * @used-by \Df\Payment\Webhook::configCached()
 	 * @return array(string => mixed)
 	 */
-	final protected function config() {return [
+	protected function config() {return [
 		self::$externalIdKey => 'txnid'
 		,self::$needCapture => true
 		,self::$readableStatusKey => 'restext'
@@ -21,9 +21,9 @@ class Webhook extends \Df\PaypalClone\Confirmation {
 	/**
 	 * 2016-08-29
 	 * @override
-	 * @see \Df\PaypalClone\Webhook::parentIdRawKey()
+	 * @see \Df\Payment\Webhook::parentIdRawKey()
 	 * @used-by \Df\Payment\Webhook::parentIdRaw()
 	 * @return string
 	 */
-	final protected function parentIdRawKey() {return 'refid';}
+	protected function parentIdRawKey() {return 'refid';}
 }
