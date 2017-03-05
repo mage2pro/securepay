@@ -242,18 +242,18 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * This field is typically a shopping cart id or invoice number
 	 * and is used to match the SecurePay transaction to your application.»
 	 * @override
-	 * @see \Df\PaypalClone\Charge::requestIdKey()
+	 * @see \Df\PaypalClone\Charge::k_RequestId()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @return string
 	 */
-	protected function requestIdKey() {return 'EPS_REFERENCEID';}
+	protected function k_RequestId() {return 'EPS_REFERENCEID';}
 
 	/**
 	 * 2016-08-27
 	 * @override
-	 * @see \Df\PaypalClone\Charge::signatureKey()
+	 * @see \Df\PaypalClone\Charge::k_Signature()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @return string
 	 */
-	protected function signatureKey() {return 'EPS_FINGERPRINT';}
+	protected function k_Signature() {return 'EPS_FINGERPRINT';}
 }
