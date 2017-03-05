@@ -4,7 +4,7 @@ use Dfe\SecurePay\Webhook as W;
 /**
  * 2016-08-28
  * @final
- * @method W|string|null responseF(string $key = null)
+ * @method W|string|null responseF(string $k = null)
  */
 class Info extends \Df\PaypalClone\BlockInfo {
 	/**
