@@ -23,23 +23,6 @@ final class Charge extends \Df\PaypalClone\Charge {
 	protected function amountFormat($amount) {return df_f2(parent::amountFormat($amount));}
 
 	/**
-	 * 2016-08-29
-	 * 2016-08-26
-	 * «5.1.1.4 Payment Reference».
-	 * Mandatory
-	 * String, min length 1, max length 60
-	 * «A string that identifies the transaction.
-	 * This string is stored by SecurePay as the Transaction Reference.
-	 * This field is typically a shopping cart id or invoice number
-	 * and is used to match the SecurePay transaction to your application.»
-	 * @override
-	 * @see \Df\PaypalClone\Charge\IRequestIdKey::requestIdKey()
-	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @return string
-	 */
-	static function requestIdKey() {return 'EPS_REFERENCEID';}
-
-	/**
 	 * 2016-08-26
 	 * @override
 	 * @see \Df\PaypalClone\Charge::params()
@@ -247,6 +230,23 @@ final class Charge extends \Df\PaypalClone\Charge {
 		// «Payee’s zip/post code»
 		,'EPS_ZIPCODE' => $this->addressSB()->getPostcode()
 	];}
+
+	/**
+	 * 2016-08-29
+	 * 2016-08-26
+	 * «5.1.1.4 Payment Reference».
+	 * Mandatory
+	 * String, min length 1, max length 60
+	 * «A string that identifies the transaction.
+	 * This string is stored by SecurePay as the Transaction Reference.
+	 * This field is typically a shopping cart id or invoice number
+	 * and is used to match the SecurePay transaction to your application.»
+	 * @override
+	 * @see \Df\PaypalClone\Charge::requestIdKey()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @return string
+	 */
+	protected function requestIdKey() {return 'EPS_REFERENCEID';}
 
 	/**
 	 * 2016-08-27
