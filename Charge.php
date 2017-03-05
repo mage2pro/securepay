@@ -48,117 +48,93 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * @return array(string => mixed)
 	 */
 	protected function params() {$s = $this->ss(); return [
-		/**
-		 * 2016-08-26
-		 * Mandatory when EPS_TXNTYPE includes 3D Secure
-		 * String, length 20
-		 * «3D Secure Transaction ID string.
-		 * MUST uniquely reference this transaction to the Merchant,
-		 * and MUST be 20 characters in length.
-		 * Any ASCII characters may be used to build this string.
-		 * E.g. May comprise of a timestamp padded with 0s for uniqueness: "20110714112034872000".»
-		 */
+		// 2016-08-26
+		// Mandatory when EPS_TXNTYPE includes 3D Secure
+		// String, length 20
+		// «3D Secure Transaction ID string.
+		// MUST uniquely reference this transaction to the Merchant,
+		// and MUST be 20 characters in length.
+		// Any ASCII characters may be used to build this string.
+		// E.g. May comprise of a timestamp padded with 0s for uniqueness: "20110714112034872000".»
 		'3D_XID' => str_pad($this->oii(), 20, '0')
-		/**
-		 * 2016-08-26
-		 * «5.1.1.2 Transaction Amount».
-		 * Mandatory
-		 * Numeric, two decimal places, from 0.01 to 99999999.99
-		 * «The total amount of the purchase transaction.
-		 * By default the currency is AUD (Australian Dollars).»
-		 */
+		// 2016-08-26
+		// «5.1.1.2 Transaction Amount».
+		// Mandatory
+		// Numeric, two decimal places, from 0.01 to 99999999.99
+		// «The total amount of the purchase transaction.
+		// By default the currency is AUD (Australian Dollars).»
 		,'EPS_AMOUNT' => $this->amountF()
-		/**
-		 * 2016-08-26
-		 * Optional
-		 * String, length 2, ISO 4217 currency code
-		 * «Payee’s Country two letter code»
-		 */
+		// 2016-08-26
+		// Optional
+		// String, length 2, ISO 4217 currency code
+		// «Payee’s Country two letter code»
 		,'EPS_BILLINGCOUNTRY' => $this->addressB()->getCountryId()
-		/**
-		 * 2016-08-27
-		 * Если этот параметр указан, то система передаёт сюда те же параметры, что и на EPS_RESULTURL.
-		 * Учитывая, что система всё равно передаст те же параметры на EPS_RESULTURL,
-		 * то изначально неочевиден смысл реализовывать ещё и  EPS_CALLBACKURL.
-		 *
-		 * Однако со временем увидел некоторые преимущества:
-		 * 1) унификация архитектуры с другими моими модулями
-		 * 2) упрощение кода контроллера
-		 * (не смешиваем обработку операций возвращения покупателя и оповещения о платеже)
-		 * 3) возможности увидеть статус обработки оповещения о платеже (код HTTP)
-		 * в личном кабинете магазина.
-		 * Поэтому оставил EPS_CALLBACKURL.
-		 */
+		// 2016-08-27
+		// Если этот параметр указан, то система передаёт сюда те же параметры, что и на EPS_RESULTURL.
+		// Учитывая, что система всё равно передаст те же параметры на EPS_RESULTURL,
+		// то изначально неочевиден смысл реализовывать ещё и  EPS_CALLBACKURL.
+		//
+		// Однако со временем увидел некоторые преимущества:
+		// 1) унификация архитектуры с другими моими модулями
+		// 2) упрощение кода контроллера
+		// (не смешиваем обработку операций возвращения покупателя и оповещения о платеже)
+		// 3) возможности увидеть статус обработки оповещения о платеже (код HTTP)
+		// в личном кабинете магазина.
+		// Поэтому оставил EPS_CALLBACKURL.
 		,'EPS_CALLBACKURL' => $this->callback()
-		/**
-		 * 2016-08-26
-		 * «5.1.1.12 Currency».
-		 * Optional (default AUD)
-		 * «If your bank supports multicurrency,
-		 * you may optionally set the currency of the transaction to one other than AUD.»
-		 * «Used to set the transaction currency sent to the bank for processing.
-		 * You must have a bank merchant facility
-		 * that accepts currencies other than AUD before using this feature.
-		 * Set the currency to any ISO 4217 three letter currency code. E.g. USD, NZD, GBP, etc.»
-		 */
+		// 2016-08-26
+		// «5.1.1.12 Currency».
+		// Optional (default AUD)
+		// «If your bank supports multicurrency,
+		// you may optionally set the currency of the transaction to one other than AUD.»
+		// «Used to set the transaction currency sent to the bank for processing.
+		// You must have a bank merchant facility
+		// that accepts currencies other than AUD before using this feature.
+		// Set the currency to any ISO 4217 three letter currency code. E.g. USD, NZD, GBP, etc.»
 		,'EPS_CURRENCY' => $this->currencyC()
-		/**
-		 * 2016-08-26
-		 * Optional
-		 * String, length 2, ISO 4217 currency code
-		 * «Order delivery country two letter code»
-		 */
+		// 2016-08-26
+		// Optional
+		// String, length 2, ISO 4217 currency code
+		// «Order delivery country two letter code»
 		,'EPS_DELIVERYCOUNTRY' => !$this->addressS() ? null : $this->addressS()->getCountryId()
-		/**
-		 * 2016-08-26
-		 * Optional
-		 * String, length 2, ISO 4217 currency code
-		 * «Payee’s email address»
-		 */
+		// 2016-08-26
+		// Optional
+		// String, length 2, ISO 4217 currency code
+		// «Payee’s email address»
 		,'EPS_EMAILADDRESS' => $this->customerEmail()
-		/**
-		 * 2016-08-26
-		 * Optional
-		 * String, length less than 30
-		 * «Payee’s first name»
-		 */
+		// 2016-08-26
+		// Optional
+		// String, length less than 30
+		// «Payee’s first name»
 		,'EPS_FIRSTNAME' => $this->customerNameF()
-		/**
-		 * 2016-08-26
-		 * Mandatory when EPS_TXNTYPE includes FraudGuard
-		 * String, length up to 15
-		 * «Payee’s IPV4 IP Address – should be obtained from the card holder’s browser.
-		 * Typically a programmatic environment variable such as remote IP.»
-		 */
+		// 2016-08-26
+		// Mandatory when EPS_TXNTYPE includes FraudGuard
+		// String, length up to 15
+		// «Payee’s IPV4 IP Address – should be obtained from the card holder’s browser.
+		// Typically a programmatic environment variable such as remote IP.»
 		,'EPS_IP' => $this->customerIp()
-		/**
-		 * 2016-08-26
-		 * Optional
-		 * String, length less than 30
-		 * «Payee’s last name»
-		 */
+		// 2016-08-26
+		// Optional
+		// String, length less than 30
+		// «Payee’s last name»
 		,'EPS_LASTNAME' => $this->customerNameL()
-		/**
-		 * 2016-08-26
-		 * «5.1.1.1 Merchant ID».
-		 * Mandatory
-		 * Alpha-numeric, length 7
-		 * «The Merchant ID field, “EPS_MERCHANT”, is mandatory.
-		 * It is the SecurePay account to process payments.
-		 * SecurePay Customer Support will supply your Merchant ID when your account is activated.
-		 * The Merchant ID will be of the format “ABC0010”,
-		 * where ABC is your unique three-letter account code,
-		 * also used for logging in to the SecurePay Merchant Log In.»
-		 */
+		// 2016-08-26
+		// «5.1.1.1 Merchant ID».
+		// Mandatory
+		// Alpha-numeric, length 7
+		// «The Merchant ID field, “EPS_MERCHANT”, is mandatory.
+		// It is the SecurePay account to process payments.
+		// SecurePay Customer Support will supply your Merchant ID when your account is activated.
+		// The Merchant ID will be of the format “ABC0010”,
+		// where ABC is your unique three-letter account code,
+		// also used for logging in to the SecurePay Merchant Log In.»
 		,'EPS_MERCHANT' => $s->merchantID()
-		/**
-		 * 2016-08-26
-		 * Mandatory when EPS_TXNTYPE includes 3D Secure
-		 * String, length less than 20
-		 * «Your online merchant number specified by your bank
-		 * which has been registered for Verified by Visa or SecureCode, or both.
-		 * This will be your bank merchant number, e.g. "22123456".»
-		 */
+		// 2016-08-26
+		// Mandatory when EPS_TXNTYPE includes 3D Secure
+		// String, length less than 20
+		// «Your online merchant number specified by your bank
+		// which has been registered for Verified by Visa or SecureCode, or both.
+		// This will be your bank merchant number, e.g. "22123456".»
 		,'EPS_MERCHANTNUM' => !$s->enable3DS() ? null : $s->merchantID_3DS()
 		/**
 		 * 2016-08-26
@@ -223,12 +199,10 @@ final class Charge extends \Df\PaypalClone\Charge {
 		 * https://github.com/thephpleague/omnipay-securepay/blob/v2.1.0/src/Message/DirectPostAuthorizeRequest.php#L22
 		 */
 		,'EPS_TIMESTAMP' => gmdate('YmdHis')
-		/**
-		 * 2016-08-26
-		 * Optional
-		 * String, length less than 30
-		 * «Payee’s town»
-		 */
+		// 2016-08-26
+		// Optional
+		// String, length less than 30
+		// «Payee’s town»
 		,'PS_TOWN' => $this->addressSB()->getCity()
 		/**
 		 * 2016-08-26
@@ -268,12 +242,10 @@ final class Charge extends \Df\PaypalClone\Charge {
 		 * 		See section 3.4.4.4. for more details».
 		 */
 		,'EPS_TXNTYPE' => 0
-		/**
-		 * 2016-08-26
-		 * Optional
-		 * String, length less than 30
-		 * «Payee’s zip/post code»
-		 */
+		// 2016-08-26
+		// Optional
+		// String, length less than 30
+		// «Payee’s zip/post code»
 		,'EPS_ZIPCODE' => $this->addressSB()->getPostcode()
 	];}
 
