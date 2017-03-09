@@ -2,7 +2,7 @@
 namespace Dfe\SecurePay\Block;
 /**
  * 2016-08-28
- * @final Unable to use the PHP «final» keyword because of the M2 code generation.
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  * @method string|null responseF(string $k = null)
  */
 class Info extends \Df\PaypalClone\BlockInfo {
