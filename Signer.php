@@ -1,11 +1,17 @@
 <?php
-// 2016-08-26
 namespace Dfe\SecurePay;
 use Dfe\SecurePay\Settings as S;
+/**
+ * 2016-08-26  
+ * @see \Dfe\SecurePay\Signer\Request 
+ * @see \Dfe\SecurePay\Signer\Response
+ */
 abstract class Signer extends \Df\PaypalClone\Signer {
 	/**
 	 * 2016-08-27
 	 * @used-by \Dfe\SecurePay\Signer::sign()
+	 * @see \Dfe\SecurePay\Signer\Request::values()
+	 * @see \Dfe\SecurePay\Signer\Response::values()
 	 * @return string[]
 	 */
 	abstract protected function values();

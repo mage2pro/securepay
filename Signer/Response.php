@@ -1,7 +1,7 @@
 <?php
-// 2016-08-27
 namespace Dfe\SecurePay\Signer;
-use Dfe\SecurePay\Webhook as W;
+use Dfe\SecurePay\W\Handler as W;
+// 2016-08-27
 /** @method W caller() */
 final class Response extends \Dfe\SecurePay\Signer {
 	/**
@@ -15,11 +15,11 @@ final class Response extends \Dfe\SecurePay\Signer {
 	 * @used-by \Dfe\SecurePay\Signer::sign()
 	 * @return string[]
 	 */
-	protected function values() {return array_merge(
-		[$this['merchant']],
+	protected function values() {/** @var array(string => mixed) $v */$v = $this->v(); return array_merge(
+		[$v['merchant']],
 		8 === intval($this->req('EPS_TXNTYPE'))
-			? [$this->req('EPS_STORETYPE'), $this['refid']] : [$this['refid'], $this->req('EPS_AMOUNT')],
-		[$this['timestamp'], $this['summarycode']]
+			? [$this->req('EPS_STORETYPE'), $v['refid']] : [$v['refid'], $this->req('EPS_AMOUNT')],
+		[$v['timestamp'], $v['summarycode']]
 	);}
 
 	/**
