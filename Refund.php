@@ -2,10 +2,8 @@
 namespace Dfe\SecurePay;
 use Df\Xml\X;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
-/**
- * 2016-08-30
- * @method Method m()
- */
+// 2016-08-30
+/** @method Method m() */
 final class Refund extends \Df\PaypalClone\Refund {
 	/**
 	 * 2016-09-07
@@ -43,10 +41,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 				,'timeoutValue' => 120
 				,'apiVersion' => 'xml-4.2'
 			]
-			,'MerchantInfo' => [
-				'merchantID' => $s->merchantID()
-				,'password' => df_cdata($s->transactionPassword())
-			]
+			,'MerchantInfo' => ['merchantID' => $s->merchantID(), 'password' => df_cdata($s->password())]
 			,'RequestType' => 'Payment'
 			,'Payment' => [
 				df_xml_node('TxnList', ['count' => 1], [
@@ -61,15 +56,16 @@ final class Refund extends \Df\PaypalClone\Refund {
 			]
 		]);
 		/** @var \Zend_Http_Client $c */
-		$c = new \Zend_Http_Client;
-		$c->setHeaders('content-type', 'text/xml');
-		$c->setConfig(['timeout' => 120]);
-		$c->setUri($this->url('https://{stage}.securepay.com.au/xmlapi/payment'));
-		$c->setRawData($xA);
+		$c = (new \Zend_Http_Client)
+			->setHeaders('content-type', 'text/xml')
+			->setConfig(['timeout' => 120])
+			->setUri($this->url('https://{stage}.securepay.com.au/xmlapi/payment'))
+			->setRawData($xA)
+		;
 		/** @var string $xB */
 		$xB = $c->request(\Zend_Http_Client::POST)->getBody();
 		/** @var string $xAL */
-		$xAL = df_xml_prettify(str_replace($s->transactionPassword(), '*****', $xA));
+		$xAL = df_xml_prettify(str_replace($s->password(), '*****', $xA));
 		/** @var string $xBL */
 		$xBL = df_xml_prettify($xB);
 		$this->m()->iiaSetTRR($xAL, $xBL);
@@ -86,32 +82,30 @@ final class Refund extends \Df\PaypalClone\Refund {
 			$errorMessage = df_leaf_sne($status->{'statusDescription'});
 		}
 		else {
-			/**
-			 * 2016-09-01
-			 * При повторной попытке возврата SecurePay всё равно возвращает:
-				<Status>
-					<statusCode>000</statusCode>
-					<statusDescription>Normal</statusDescription>
-				</Status>
-			 *
-			 * Поэтому допольнительно смотрим другой кусок ответа: Payment/TxnList/Txn
-			 * В случае успеха там:
-					<approved>Yes</approved>
-					<responseCode>00</responseCode>
-					<responseText>Approved</responseText>
-					<thinlinkResponseCode>100</thinlinkResponseCode>
-					<thinlinkResponseText>000</thinlinkResponseText>
-					<thinlinkEventStatusCode>000</thinlinkEventStatusCode>
-					<thinlinkEventStatusText>Normal</thinlinkEventStatusText>
-			 * В случае сбоя там:
-					<approved>No</approved>
-					<responseCode>134</responseCode>
-					<responseText>Transaction already fully refunded</responseText>
-					<thinlinkResponseCode>300</thinlinkResponseCode>
-					<thinlinkResponseText>000</thinlinkResponseText>
-					<thinlinkEventStatusCode>999</thinlinkEventStatusCode>
-					<thinlinkEventStatusText>Error - Transaction Already Fully Refunded/Only $x.xx Available for Refund</thinlinkEventStatusText>
-			 */
+			// 2016-09-01
+			// При повторной попытке возврата SecurePay всё равно возвращает:
+			//	<Status>
+			//		<statusCode>000</statusCode>
+			//		<statusDescription>Normal</statusDescription>
+			//	</Status>
+			//
+			// Поэтому допольнительно смотрим другой кусок ответа: Payment/TxnList/Txn
+			// В случае успеха там:
+			//		<approved>Yes</approved>
+			//		<responseCode>00</responseCode>
+			//		<responseText>Approved</responseText>
+			//		<thinlinkResponseCode>100</thinlinkResponseCode>
+			//		<thinlinkResponseText>000</thinlinkResponseText>
+			//		<thinlinkEventStatusCode>000</thinlinkEventStatusCode>
+			//		<thinlinkEventStatusText>Normal</thinlinkEventStatusText>
+			// В случае сбоя там:
+			//		<approved>No</approved>
+			//		<responseCode>134</responseCode>
+			//		<responseText>Transaction already fully refunded</responseText>
+			//		<thinlinkResponseCode>300</thinlinkResponseCode>
+			//		<thinlinkResponseText>000</thinlinkResponseText>
+			//		<thinlinkEventStatusCode>999</thinlinkEventStatusCode>
+			//		<thinlinkEventStatusText>Error - Transaction Already Fully Refunded/Only $x.xx Available for Refund</thinlinkEventStatusText>
 			/** @var X $txn */
 			$txn = $xxB->{'Payment'}->{'TxnList'}->{'Txn'};
 			if ('Yes' !== df_leaf_sne($txn->{'approved'})) {
@@ -119,11 +113,9 @@ final class Refund extends \Df\PaypalClone\Refund {
 			}
 		}
 		if ($errorMessage) {
-			/**
-			 * 2016-09-01
-			 * Из-за бага в ядре исключительная ситуация при refund не только не логируется,
-			 * а и вообще теряется. Поэтому мы и логируем её сами.
-			 */
+			// 2016-09-01
+			// Из-за бага в ядре исключительная ситуация при refund не только не логируется,
+			// а и вообще теряется. Поэтому мы и логируем её сами.
 			dfp_report($this, $xAL, 'request');
 			dfp_report($this, $xBL, 'response');
 			df_error($errorMessage);
@@ -132,15 +124,13 @@ final class Refund extends \Df\PaypalClone\Refund {
 
 	/**
 	 * 2016-08-31
+	 * API requires the timezone offset in minutes
 	 * https://github.com/thephpleague/omnipay-securepay/blob/a7b1b5/src/Message/SecureXMLAbstractRequest.php#L124-L138
 	 * @return string
 	 */
-	private function timestamp() {
-		/** @var \DateTime $date */
-		$date = new \DateTime;
-		// API requires the timezone offset in minutes
-		return $date->format(sprintf('YmdHis000%+04d', $date->format('Z') / 60));
-	}
+	private function timestamp() {/** @var \DateTime $d */ $d = new \DateTime; return
+		$d->format(sprintf('YmdHis000%+04d', $d->format('Z') / 60))
+	;}
 
 	/**
 	 * 2016-08-27
@@ -148,7 +138,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 * @return array(string, array(string => mixed))
 	 */
 	static function p(Method $m) {
-		/** @var Refund $i */
+		/** @var self $i */
 		$i = new self($m);
 		$i->process();
 		return [$i->cm()->getIncrementId(), []];

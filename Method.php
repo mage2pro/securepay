@@ -15,17 +15,12 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 	 */
 	function amountFormat($amount) {
 		if ($this->test()) {
-			/** @var string $forceResult */
-			$forceResult = $this->s()->forceResult();
-			/** @var string $amountLast2 */
-			$amountLast2 = dfp_last2($amount);
 			/** @var bool $approved */
-			$approved = in_array($amountLast2, ['00', '08', '11', '16']);
+			$approved = in_array(dfp_last2($amount), ['00', '08', '11', '16']);
 			/** @var bool $approve */
-			$approve = 'approve' === $forceResult;
-			/** @var bool $needAdjust */
-			$needAdjust = ('no' !== $forceResult) && ($approve !== $approved);
-			if ($needAdjust) {
+			/** @var string $forceResult */
+			$approve = 'approve' === ($forceResult = $this->s()->forceResult());
+			if ('no' !== $forceResult && $approve !== $approved) {
 				$amount = $approve ? round($amount) : $amount + 0.01;
 			}
 		}
@@ -67,7 +62,7 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 		list($id, $p) = Refund::p($this);
 		// 2016-08-20
 		// Иначе автоматический идентификатор будет таким: <первичная транзакция>-capture-refund
-		$this->ii()->setTransactionId(self::e2i($id));
+		$this->ii()->setTransactionId($this->e2i($id));
 		$this->iiaSetTR($p);
 	}
 
