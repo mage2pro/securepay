@@ -3,9 +3,9 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
 >
+	<virtualType name='Dfe\SecurePay\Controller\Confirm\Index' type='Df\Payment\W\Action'/>
+	<virtualType name='Dfe\SecurePay\Controller\CustomerReturn\Index' type='Df\Payment\Action\CustomerReturn'/>
 	<virtualType name='Dfe\SecurePay\Ext' type='Df\Config\Ext'>
-		<arguments>
-			<argument name='name' xsi:type='string'>mage2pro/securepay</argument>
-		</arguments>
+		<arguments><argument name='name' xsi:type='string'>mage2pro/securepay</argument></arguments>
 	</virtualType>
 </config>
