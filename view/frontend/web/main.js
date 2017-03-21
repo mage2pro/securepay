@@ -87,23 +87,6 @@ define([
 		return this;
 	},
 	/**
-	 * 2016-08-26
-	 * @override
-	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
-	 * @used-by placeOrderInternal()
-	 */
-	onSuccess: function(json) {
-		/** @type {Object} */
-		var data = $.parseJSON(json);
-		// @see \Dfe\SecurePay\Method::getConfigPaymentAction()
-		redirectWithPost(data.uri, df.o.merge(data.params, {
-			EPS_CCV: this.creditCardVerificationNumber()
-			,EPS_EXPIRYYEAR: this.creditCardExpYear()
-			,EPS_CARDNUMBER: this.creditCardNumber()
-			,EPS_EXPIRYMONTH: this.creditCardExpMonth()
-		}));
-	},
-	/**
 	 * 2016-08-25
 	 * @override
 	 * @see https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Checkout/view/frontend/web/js/view/payment/default.js#L127-L159
@@ -114,5 +97,18 @@ define([
 		if (this.validate()) {
 			this.placeOrderInternal();
 		}
-	}
+	},
+	/**
+	 * 2017-03-21
+	 * @override
+	 * @see Df_Payment/mixin::postParams()
+	 * @used-by Df_Payment/mixin::placeOrderInternal()
+	 * @returns {Object}
+	 */
+	postParams: function() {return {
+		EPS_CCV: this.creditCardVerificationNumber()
+		,EPS_EXPIRYYEAR: this.creditCardExpYear()
+		,EPS_CARDNUMBER: this.creditCardNumber()
+		,EPS_EXPIRYMONTH: this.creditCardExpMonth()
+	};}
 });});
