@@ -1,9 +1,7 @@
 <?php
 namespace Dfe\SecurePay\Signer;
 use Df\Payment\W\F;
-use Dfe\SecurePay\W\Handler as W;
 // 2016-08-27
-/** @method W caller() */
 final class Response extends \Dfe\SecurePay\Signer {
 	/**
 	 * 2016-08-27
@@ -16,7 +14,7 @@ final class Response extends \Dfe\SecurePay\Signer {
 	 */
 	protected function values() {
 		/** @var array(string => mixed) $p */
-		$p = df_trans_rd(F::s($this)->nav()->p());
+		$p = df_trd(F::s($this)->nav()->p());
 		/** @var array(string => mixed) $v */
 		$v = $this->v();
 		return array_merge(
