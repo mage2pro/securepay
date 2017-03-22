@@ -56,7 +56,9 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 	 * @param float|null $amount
 	 * @return void
 	 */
-	protected function _refund($amount) {$this->ii()->setTransactionId($this->e2i(Refund::p($this)));}
+	protected function _refund($amount) {
+		$this->ii()->setTransactionId($this->tid()->e2i(Refund::p($this)))
+	;}
 
 	/**
 	 * 2017-02-08
