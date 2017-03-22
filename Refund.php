@@ -135,12 +135,12 @@ final class Refund extends \Df\PaypalClone\Refund {
 	/**
 	 * 2016-08-27
 	 * @param Method $m
-	 * @return array(string, array(string => mixed))
+	 * @return string
 	 */
 	static function p(Method $m) {
 		/** @var self $i */
 		$i = new self($m);
 		$i->process();
-		return [$i->cm()->getIncrementId(), []];
+		return $i->cm()->getIncrementId();
 	}
 }

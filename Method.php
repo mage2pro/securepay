@@ -56,15 +56,7 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 	 * @param float|null $amount
 	 * @return void
 	 */
-	protected function _refund($amount) {
-		/** @var string $id */
-		/** @var array(string => mixed) $p */
-		list($id, $p) = Refund::p($this);
-		// 2016-08-20
-		// Иначе автоматический идентификатор будет таким: <первичная транзакция>-capture-refund
-		$this->ii()->setTransactionId($this->e2i($id));
-		$this->iiaSetTR($p);
-	}
+	protected function _refund($amount) {$this->ii()->setTransactionId($this->e2i(Refund::p($this)));}
 
 	/**
 	 * 2017-02-08
