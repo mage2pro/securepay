@@ -79,17 +79,4 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 	 * @return null
 	 */
 	protected function amountLimits() {return null;}
-
-	/**
-	 * 2016-08-27
-	 * 2017-02-16
-	 * SecurePay has changed the URL for Direct Post API testing: https://mage2.pro/t/2779
-	 * @override
-	 * @see \Df\PaypalClone\Method\Normal::pcRedirectUrl()
-	 * @used-by \Df\PaypalClone\Method\Normal::getConfigPaymentAction()
-	 * @return string
-	 */
-	protected function pcRedirectUrl() {return
-		'https://{stage}api.securepay.com.au/live/directpost/authorise'
-	;}
 }
