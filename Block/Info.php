@@ -4,7 +4,7 @@ use Dfe\SecurePay\W\Event;
 /**
  * 2016-08-28
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
- * @method Event|string|null responseF(string $k = null)
+ * @method Event|string|null e(...$k)
  */
 class Info extends \Df\PaypalClone\BlockInfo {
 	/**
@@ -14,7 +14,7 @@ class Info extends \Df\PaypalClone\BlockInfo {
 	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
 	 */
 	final protected function prepare() {
-		$this->si('Card Number', str_replace('...', '*******', $this->responseF('pan')));
-		$this->siB('SecurePay ID', $this->responseF()->idE());
+		$this->si('Card Number', str_replace('...', '*******', $this->e('pan')));
+		$this->siB('SecurePay ID', $this->e()->idE());
 	}
 }

@@ -4,7 +4,6 @@ namespace Dfe\SecurePay;
 use Df\Payment\W\Event;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
-/** @method Event|string|null responseF(string $k = null) */
 final class Method extends \Df\PaypalClone\Method {
 	/**
 	 * 2016-08-31
