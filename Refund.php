@@ -52,7 +52,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 						'txnType' => 4
 						,'txnSource' => 23
 						,'amount' => $this->amountF()
-						,'purchaseOrderNo' => df_cdata($tm->requestP('EPS_REFERENCEID'))
+						,'purchaseOrderNo' => df_cdata($tm->req('EPS_REFERENCEID'))
 						,'txnID' => $tm->responseF('txnid')
 					])
 				])

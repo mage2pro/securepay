@@ -15,7 +15,7 @@ final class Response extends \Dfe\SecurePay\Signer {
 	 */
 	protected function values() {
 		/** @var array(string => mixed) $p */
-		$p = F::s($this)->nav()->pReq();
+		$p = df_tm($this)->req();
 		/** @var array(string => mixed) $v */
 		$v = $this->v();
 		return array_merge(
