@@ -17,16 +17,6 @@ final class Refund extends \Df\PaypalClone\Refund {
 	protected function amountFormat($amount) {return round(100 * parent::amountFormat($amount));}
 
 	/**
-	 * 2016-08-31
-	 * Первый параметр — для test, второй — для live.
-	 * @override
-	 * @see \Df\PaypalClone\Refund::stageNames()  
-	 * @used-by \Df\PaypalClone\Refund::url()
-	 * @return string[]
-	 */
-	protected function stageNames() {return ['test', 'api'];}
-
-	/**
 	 * 2016-08-20
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @return void
@@ -62,7 +52,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 		$c = (new \Zend_Http_Client)
 			->setHeaders('content-type', 'text/xml')
 			->setConfig(['timeout' => 120])
-			->setUri($this->url('https://{stage}.securepay.com.au/xmlapi/payment'))
+			->setUri(dfp_url($this, 'https://{stage}.securepay.com.au/xmlapi/payment', ['test', 'api']))
 			->setRawData($xA)
 		;
 		/** @var string $xB */
@@ -131,9 +121,9 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 * https://github.com/thephpleague/omnipay-securepay/blob/a7b1b5/src/Message/SecureXMLAbstractRequest.php#L124-L138
 	 * @return string
 	 */
-	private function timestamp() {/** @var \DateTime $d */ $d = new \DateTime; return
-		$d->format(sprintf('YmdHis000%+04d', $d->format('Z') / 60))
-	;}
+	private function timestamp() {/** @var \DateTime $d */ $d = new \DateTime; return $d->format(
+		sprintf('YmdHis000%+04d', $d->format('Z') / 60)
+	);}
 
 	/**
 	 * 2016-08-27

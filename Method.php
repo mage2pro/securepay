@@ -35,19 +35,6 @@ final class Method extends \Df\PaypalClone\Method {
 	function canRefund() {return true;}
 
 	/**
-	 * 2016-08-27
-	 * Первый параметр — для test, второй — для live.
-	 * 2017-02-16
-	 * SecurePay has changed the URL for Direct Post API testing: https://mage2.pro/t/2779
-	 * @override
-	 * @see \Df\PaypalClone\Method::stageNames()
-	 * @used-by \Df\PaypalClone\Method::url()
-	 * @used-by \Df\PaypalClone\Refund::stageNames()
-	 * @return string[]
-	 */
-	function stageNames() {return ['test.', ''];}
-
-	/**
 	 * 2016-08-30
 	 * @override
 	 * @see \Df\Payment\Method::_refund()
