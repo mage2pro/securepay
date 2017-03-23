@@ -1,5 +1,6 @@
 <?php
 namespace Dfe\SecurePay;
+use Df\Payment\TM;
 use Df\Xml\X;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 // 2016-08-30
@@ -33,6 +34,8 @@ final class Refund extends \Df\PaypalClone\Refund {
 	private function process() {
 		/** @var Settings $s */
 		$s = $this->ss();
+		/** @var TM $tm */
+		$tm = df_tm($this->m());
 		/** @var string $xA */
 		$xA = df_xml_g('SecurePayMessage', [
 			'MessageInfo' => [
@@ -49,8 +52,8 @@ final class Refund extends \Df\PaypalClone\Refund {
 						'txnType' => 4
 						,'txnSource' => 23
 						,'amount' => $this->amountF()
-						,'purchaseOrderNo' => df_cdata($this->tm()->requestP('EPS_REFERENCEID'))
-						,'txnID' => $this->tm()->responseF('txnid')
+						,'purchaseOrderNo' => df_cdata($tm->requestP('EPS_REFERENCEID'))
+						,'txnID' => $tm->responseF('txnid')
 					])
 				])
 			]

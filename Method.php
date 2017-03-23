@@ -5,7 +5,7 @@ use Df\Payment\W\Event;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /** @method Event|string|null responseF(string $k = null) */
-final class Method extends \Df\PaypalClone\Method\Normal {
+final class Method extends \Df\PaypalClone\Method {
 	/**
 	 * 2016-08-31
 	 * @override
@@ -41,8 +41,8 @@ final class Method extends \Df\PaypalClone\Method\Normal {
 	 * 2017-02-16
 	 * SecurePay has changed the URL for Direct Post API testing: https://mage2.pro/t/2779
 	 * @override
-	 * @see \Df\PaypalClone\Method\Normal::stageNames()
-	 * @used-by \Df\PaypalClone\Method\Normal::url()
+	 * @see \Df\PaypalClone\Method::stageNames()
+	 * @used-by \Df\PaypalClone\Method::url()
 	 * @used-by \Df\PaypalClone\Refund::stageNames()
 	 * @return string[]
 	 */
