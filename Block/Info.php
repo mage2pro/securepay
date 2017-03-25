@@ -6,7 +6,7 @@ use Dfe\SecurePay\W\Event;
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  * @method Event|string|null e(...$k)
  */
-class Info extends \Df\PaypalClone\BlockInfo {
+class Info extends \Df\Payment\Block\Info {
 	/**
 	 * 2016-08-28
 	 * @override
