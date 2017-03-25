@@ -15,6 +15,6 @@ class Info extends \Df\PaypalClone\BlockInfo {
 	 */
 	final protected function prepare() {
 		$this->si('Card Number', str_replace('...', '*******', $this->e('pan')));
-		$this->siB('SecurePay ID', $this->e()->idE());
+		$this->siEx('SecurePay ID', $this->e()->idE());
 	}
 }
