@@ -1,10 +1,10 @@
 <?php
 namespace Dfe\SecurePay;
-use Dfe\SecurePay\Settings as S;
 /**
  * 2016-08-26  
  * @see \Dfe\SecurePay\Signer\Request 
- * @see \Dfe\SecurePay\Signer\Response
+ * @see \Dfe\SecurePay\Signer\Response 
+ * @method Settings s()
  */
 abstract class Signer extends \Df\PaypalClone\Signer {
 	/**
@@ -24,6 +24,6 @@ abstract class Signer extends \Df\PaypalClone\Signer {
 	 * @return string
 	 */
 	final protected function sign() {return sha1(implode('|', dfa_insert(
-		$this->values(), 1, S::s()->password()
+		$this->values(), 1, $this->s()->password()
 	)));}
 }

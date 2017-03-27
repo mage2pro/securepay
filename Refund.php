@@ -23,7 +23,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 */
 	private function process() {
 		/** @var Settings $s */
-		$s = $this->ss();
+		$s = $this->s();
 		/** @var TM $tm */
 		$tm = df_tm($this->m());
 		/** @var string $xA */

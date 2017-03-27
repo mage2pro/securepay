@@ -3,7 +3,7 @@ namespace Dfe\SecurePay;
 /**
  * 2016-08-26
  * @method Method m()
- * @method Settings ss()
+ * @method Settings s()
  */
 final class Charge extends \Df\PaypalClone\Charge {
 	/**
@@ -29,7 +29,7 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @return array(string => mixed)
 	 */
-	protected function pCharge() {$s = $this->ss(); return [
+	protected function pCharge() {$s = $this->s(); return [
 		// 2016-08-26
 		// Mandatory when EPS_TXNTYPE includes 3D Secure
 		// String, length 20
