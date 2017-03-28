@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\SecurePay\Source;
-final class ForceResult extends \Df\Config\SourceT {
+final class ForceResult extends \Df\Config\Source {
 	/**
 	 * 2016-08-26
 	 * «3.6.2 Simulating Approved and Declined Transactions
