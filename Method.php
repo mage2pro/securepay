@@ -39,12 +39,9 @@ final class Method extends \Df\PaypalClone\Method {
 	 * @override
 	 * @see \Df\Payment\Method::_refund()
 	 * @used-by \Df\Payment\Method::refund()
-	 * @param float|null $amount
-	 * @return void
+	 * @param float|null $amt
 	 */
-	protected function _refund($amount) {
-		$this->ii()->setTransactionId($this->tid()->e2i(Refund::p($this)))
-	;}
+	protected function _refund($amt) {$this->ii()->setTransactionId($this->tid()->e2i(Refund::p($this)));}
 
 	/**
 	 * 2017-02-08

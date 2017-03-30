@@ -19,7 +19,6 @@ final class Refund extends \Df\PaypalClone\Refund {
 	/**
 	 * 2016-08-20
 	 * @used-by \Dfe\SecurePay\Refund::p()
-	 * @return void
 	 */
 	private function process() {
 		/** @var Settings $s */
