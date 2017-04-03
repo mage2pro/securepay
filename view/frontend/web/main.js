@@ -67,18 +67,16 @@ define([
 	getCardTypes: function() {return ['VI', 'MC'];},
 	/**
 	 * 2016-08-26
+	 * «[SecurePay] The test bank card» https://mage2.pro/t/1991
+	 * Так как тестовая карта всего одна, то я не стал вводить опцию «prefill»,
+	 * ведь всё равно тестировщик не может указать другую карту.
+	 * @override
+	 * @see Df_Payment/card::initialize()
+	 * https://github.com/mage2pro/core/blob/2.4.21/Payment/view/frontend/web/card.js#L77-L110
 	 * @returns {Object}
 	*/
 	initialize: function() {
 		this._super();
-		// 2016-08-26
-		// https://mage2.pro/t/1991
-		/**
-		 * 2016-08-26
-		 * «[SecurePay] The test bank card» https://mage2.pro/t/1991
-		 * Так как тестовая карта всего одна, то я не стал вводить опцию «prefill»,
-		 * ведь всё равно тестировщик не может указать другую карту.
-		 */
 		if (this.isTest()) {
 			this.creditCardNumber('4444333322221111');
 			this.prefillWithAFutureData();
