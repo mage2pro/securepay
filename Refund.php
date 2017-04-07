@@ -1,5 +1,6 @@
 <?php
 namespace Dfe\SecurePay;
+use Df\Payment\Operation\Source\Order as OpSource;
 use Df\Payment\TM;
 use Df\Xml\X;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
@@ -131,7 +132,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 */
 	static function p(Method $m) {
 		/** @var self $i */
-		$i = new self($m);
+		$i = new self(new OpSource($m));
 		$i->process();
 		return $i->cm()->getIncrementId();
 	}
