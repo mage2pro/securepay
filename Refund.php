@@ -1,11 +1,12 @@
 <?php
 namespace Dfe\SecurePay;
+use Df\Payment\Operation\Source\Creditmemo as SCreditmemo;
 use Df\Payment\TM;
 use Df\Xml\X;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 // 2016-08-30
 /** @method Method m() */
-final class Refund extends \Df\PaypalClone\Refund {
+final class Refund extends \Df\Payment\Operation {
 	/**
 	 * 2016-09-07
 	 * @override
@@ -28,7 +29,7 @@ final class Refund extends \Df\PaypalClone\Refund {
 		/** @var string $xA */
 		$xA = df_xml_g('SecurePayMessage', [
 			'MessageInfo' => [
-				'messageID' => df_cdata(df_cc('-', $this->cm()->getIncrementId(), df_uid(4)))
+				'messageID' => df_cdata(df_cc('-', $this->id(), df_uid(4)))
 				,'messageTimestamp' => $this->timestamp()
 				,'timeoutValue' => 120
 				,'apiVersion' => 'xml-4.2'
@@ -131,8 +132,8 @@ final class Refund extends \Df\PaypalClone\Refund {
 	 */
 	static function p(Method $m) {
 		/** @var self $i */
-		$i = new self($m);
+		$i = new self(new SCreditmemo($m));
 		$i->process();
-		return $i->cm()->getIncrementId();
+		return $i->id();
 	}
 }
