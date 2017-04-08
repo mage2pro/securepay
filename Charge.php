@@ -38,7 +38,7 @@ final class Charge extends \Df\PaypalClone\Charge {
 		// and MUST be 20 characters in length.
 		// Any ASCII characters may be used to build this string.
 		// E.g. May comprise of a timestamp padded with 0s for uniqueness: "20110714112034872000".»
-		'3D_XID' => str_pad($this->oii(), 20, '0')
+		'3D_XID' => str_pad($this->id(), 20, '0')
 		// 2016-08-26
 		// «5.1.1.2 Transaction Amount».
 		// Mandatory
