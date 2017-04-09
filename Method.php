@@ -9,21 +9,21 @@ final class Method extends \Df\PaypalClone\Method {
 	 * 2016-08-31
 	 * @override
 	 * @see \Df\Payment\Method::amountFormat()
-	 * @param float $amount
+	 * @param float $a
 	 * @return float
 	 */
-	function amountFormat($amount) {
+	function amountFormat($a) {
 		if ($this->test()) {
 			/** @var bool $approved */
-			$approved = in_array(dfp_last2($amount), ['00', '08', '11', '16']);
+			$approved = in_array(dfp_last2($a), ['00', '08', '11', '16']);
 			/** @var bool $approve */
 			/** @var string $forceResult */
 			$approve = 'approve' === ($forceResult = $this->s()->forceResult());
 			if ('no' !== $forceResult && $approve !== $approved) {
-				$amount = $approve ? round($amount) : $amount + 0.01;
+				$a = $approve ? round($a) : $a + 0.01;
 			}
 		}
-		return $amount;
+		return $a;
 	}
 
 	/**

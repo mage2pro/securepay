@@ -17,10 +17,10 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * Numeric, two decimal places, from 0.01 to 99999999.99
 	 * «The total amount of the purchase transaction.
 	 * By default the currency is AUD (Australian Dollars).»
-	 * @param float $amount
+	 * @param float $a
 	 * @return string
 	 */
-	protected function amountFormat($amount) {return df_f2(parent::amountFormat($amount));}
+	protected function amountFormat($a) {return df_f2(parent::amountFormat($a));}
 
 	/**
 	 * 2016-08-26
@@ -139,7 +139,7 @@ final class Charge extends \Df\PaypalClone\Charge {
 		 *
 		 * 2016-08-27
 		 * Для моего модуля здесь нужно ставить обязательно TRUE,
-		 * потому что @see \Dfe\SecurePay\Controller\CustomerReturn\Index::execute()
+		 * потому что @see \Df\Payment\CustomerReturn::execute()
 		 * делает редиректы (на «checkout/onepage/success» или к корзине).
 		 */
 		,'EPS_REDIRECT' => 'TRUE'
