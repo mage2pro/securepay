@@ -26,8 +26,8 @@ SecurePay Direct Post, похоже, не работает на localhost,
 				showInStore='1'
 			>
 				<label>SecurePay</label>
-				<dfExtension>Dfe\SecurePay\Ext</dfExtension>
-				<frontend_model>Df\Config\Block\System\Config\Form\Fieldset\Ext</frontend_model>
+				<dfExtension>Dfe_SecurePay</dfExtension>
+				<frontend_model>Df\Config\Fieldset</frontend_model>
 				<field
 					id='enable'
 					translate='label'
