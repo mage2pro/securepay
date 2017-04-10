@@ -9,7 +9,7 @@ namespace Dfe\SecurePay;
 abstract class Signer extends \Df\PaypalClone\Signer {
 	/**
 	 * 2016-08-27
-	 * @used-by \Dfe\SecurePay\Signer::sign()
+	 * @used-by sign()
 	 * @see \Dfe\SecurePay\Signer\Request::values()
 	 * @see \Dfe\SecurePay\Signer\Response::values()
 	 * @return string[]
