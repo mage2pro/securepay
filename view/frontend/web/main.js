@@ -1,7 +1,7 @@
 // 2016-08-25
 define([
-	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/card', 'jquery'
-], function(df, redirectWithPost, parent, $) {'use strict'; return parent.extend({
+	'df', 'Df_Core/my/redirectWithPost', 'Df_Payment/card'
+], function(df, redirectWithPost, parent) {'use strict'; return parent.extend({
 	/**
 	 * 2016-08-26
 	 * «3.6.2 Simulating Approved and Declined Transactions
