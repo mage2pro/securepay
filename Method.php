@@ -1,7 +1,6 @@
 <?php
 // 2016-08-25
 namespace Dfe\SecurePay;
-use Df\Payment\W\Event;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 final class Method extends \Df\PaypalClone\Method {
