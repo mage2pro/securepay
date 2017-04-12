@@ -5,5 +5,5 @@
 >
 	<virtualType name='Dfe\SecurePay\Controller\Confirm\Index' type='Df\Payment\W\Action'/>
 	<virtualType name='Dfe\SecurePay\Controller\CustomerReturn\Index' type='Df\Payment\CustomerReturn'/>
-	<virtualType name='Dfe\SecurePay\W\Handler' type='Df\PaypalClone\W\Confirmation'/>
+	<virtualType name='Dfe\SecurePay\W\Handler' type='Df\PaypalClone\W\Handler'/>
 </config>

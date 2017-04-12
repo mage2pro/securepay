@@ -52,7 +52,7 @@ final class Refund extends \Df\Payment\Operation {
 		$c = (new \Zend_Http_Client)
 			->setHeaders('content-type', 'text/xml')
 			->setConfig(['timeout' => 120])
-			->setUri(dfp_url($this, 'https://{stage}.securepay.com.au/xmlapi/payment', ['test', 'api']))
+			->setUri(dfp_url_api($this, 'https://{stage}.securepay.com.au/xmlapi/payment', ['test', 'api']))
 			->setRawData($xA)
 		;
 		/** @var string $xB */
