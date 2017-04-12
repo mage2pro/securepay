@@ -19,12 +19,6 @@ final class Settings extends \Df\Payment\Settings\BankCard {
 
 	/**
 	 * 2016-08-26
-	 * @return string
-	 */
-	function merchantID() {return $this->testable();}
-
-	/**
-	 * 2016-08-26
 	 * «Mage2.PRO» → «Payment» → «SecurePay» → «Merchant ID for 3D Secure Validation»
 	 * @return bool
 	 */
