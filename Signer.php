@@ -21,6 +21,7 @@ abstract class Signer extends \Df\PaypalClone\Signer {
 	 * https://github.com/thephpleague/omnipay-securepay/blob/v2.1.0/src/Message/DirectPostAuthorizeRequest.php#L32-L47
 	 * @override
 	 * @see \Df\PaypalClone\Signer::sign()
+	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @return string
 	 */
 	final protected function sign() {return sha1(implode('|', dfa_insert(
