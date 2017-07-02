@@ -19,7 +19,6 @@ SecurePay Direct Post, похоже, не работает на localhost,
 			<group
 				id='secure_pay'
 				translate='label'
-				type='text'
 				sortOrder='1905'
 				showInDefault='1'
 				showInWebsite='1'
