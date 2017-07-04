@@ -18,23 +18,19 @@ SecurePay Direct Post, похоже, не работает на localhost,
 -->
 			<group
 				id='secure_pay'
-				translate='label'
+				showInDefault='1' showInStore='1' showInWebsite='1'
 				sortOrder='1905'
-				showInDefault='1'
-				showInWebsite='1'
-				showInStore='1'
+				translate='label'
 			>
 				<label>SecurePay</label>
 				<dfExtension>Dfe_SecurePay</dfExtension>
 				<frontend_model>Df\Config\Fieldset</frontend_model>
 				<field
 					id='enable'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='1'
 					translate='label'
 					type='Df\Framework\Form\Element\Checkbox'
-					sortOrder='1'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Enable?</label>
 					<backend_model>Df\Config\Backend\Checkbox</backend_model>
@@ -42,12 +38,10 @@ SecurePay Direct Post, похоже, не работает на localhost,
 				</field>
 				<field
 					id='title'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='2'
 					translate='label'
 					type='text'
-					sortOrder='2'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Title</label>
 					<comment><![CDATA[It is shown on the checkout screen.]]></comment>
@@ -56,12 +50,10 @@ SecurePay Direct Post, похоже, не работает на localhost,
 				</field>
 				<field
 					id='test'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='3'
 					translate='label'
 					type='Df\Framework\Form\Element\Checkbox'
-					sortOrder='3'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Test Mode?</label>
 					<backend_model>Df\Config\Backend\Checkbox</backend_model>
@@ -70,12 +62,10 @@ SecurePay Direct Post, похоже, не работает на localhost,
 				</field>
 				<field
 					id='forceResult'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='4'
 					translate='label'
 					type='select'
-					sortOrder='4'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Force the payment transactions result?</label>
 					<source_model>Dfe\SecurePay\Source\ForceResult</source_model>
@@ -91,11 +81,9 @@ SecurePay Direct Post, похоже, не работает на localhost,
 				</field>
 				<field
 					id='liveMerchantID'
-					translate='label'
+					showInDefault='1' showInStore='1' showInWebsite='1'
 					sortOrder='5'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
+					translate='label'
 				>
 					<label>Live Merchant ID</label>
 					<!--
@@ -111,12 +99,10 @@ SecurePay Direct Post, похоже, не работает на localhost,
 				</field>
 				<field
 					id='liveTransactionPassword'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='6'
 					translate='label'
 					type='obscure'
-					sortOrder='6'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Live Transaction Password</label>
 					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
@@ -128,24 +114,20 @@ SecurePay Direct Post, похоже, не работает на localhost,
 				</field>
 				<field
 					id='currency'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='7'
 					translate='label'
 					type='Df\Directory\FormElement\Currency'
-					sortOrder='7'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Payment Currency</label>
 					<depends><field id='enable'>1</field></depends>
 				</field>
 				<field
 					id='requireBillingAddress'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='8'
 					translate='label'
 					type='Df\Framework\Form\Element\Checkbox'
-					sortOrder='8'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Require the billing address?</label>
 					<backend_model>Df\Config\Backend\Checkbox</backend_model>
@@ -154,12 +136,10 @@ SecurePay Direct Post, похоже, не работает на localhost,
 				</field>
 				<field
 					id='log'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='9'
 					translate='label'
 					type='Df\Framework\Form\Element\Checkbox'
-					sortOrder='9'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Log the API requests and responses?</label>
 					<backend_model>Df\Config\Backend\Checkbox</backend_model>
