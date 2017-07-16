@@ -49,14 +49,12 @@ final class Refund extends \Df\Payment\Operation {
 			]
 		]);
 		/** @var \Zend_Http_Client $c */
-		$c = (new \Zend_Http_Client)
-			->setConfig(['timeout' => 120])
+		$c = df_zf_http(dfp_url_api($this, 'https://{stage}.securepay.com.au/xmlapi/payment', ['test', 'api']))
 			// 2017-06-28
 			// «Difference between the Accept and Content-Type HTTP headers»
 			// https://webmasters.stackexchange.com/questions/31212
 			->setHeaders(array_fill_keys(['accept', 'content-type'], 'text/xml'))
 			->setRawData($xA)
-			->setUri(dfp_url_api($this, 'https://{stage}.securepay.com.au/xmlapi/payment', ['test', 'api']))
 		;
 		/** @var string $xB */
 		$xB = $c->request(\Zend_Http_Client::POST)->getBody();
