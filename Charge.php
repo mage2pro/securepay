@@ -3,7 +3,7 @@ namespace Dfe\SecurePay;
 /**
  * 2016-08-26
  * 2017-08-13
- * The charge parameters are described folowing places
+ * The charge parameters are described in the following places
  * of the «Direct Post Integration Guide», Version 1.4, 2017-02-28:
  * 1) Formally: in the Chapter 5.1 «Appendix 1: Accepted Input Fields» (pages 24-31)
  * 2) Informally: in the Chapters 3.3 «Mandatory Fields» and 3.4 «Optional Features» (pages 10-19)
