@@ -2,10 +2,39 @@
 namespace Dfe\SecurePay;
 /**
  * 2016-08-26
+ * 2017-08-13
+ * The charge parameters are described in the Chapters 3.3 «Mandatory Fields» and 3.4 «Optional Features»
+ * (pages 10-19) of the «Direct Post Integration Guide», Version 1.4, 2017-02-28: https://mage2.pro/t/4271
  * @method Method m()
  * @method Settings s()
  */
 final class Charge extends \Df\PaypalClone\Charge {
+	/**
+	 * 2016-08-29
+	 * 2016-08-26
+	 * «5.1.1.4 Payment Reference».
+	 * Mandatory
+	 * String, min length 1, max length 60
+	 * «A string that identifies the transaction.
+	 * This string is stored by SecurePay as the Transaction Reference.
+	 * This field is typically a shopping cart id or invoice number
+	 * and is used to match the SecurePay transaction to your application.»
+	 * @override
+	 * @see \Df\PaypalClone\Charge::k_RequestId()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @return string
+	 */
+	protected function k_RequestId() {return 'EPS_REFERENCEID';}
+
+	/**
+	 * 2016-08-27
+	 * @override
+	 * @see \Df\PaypalClone\Charge::k_Signature()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @return string
+	 */
+	protected function k_Signature() {return 'EPS_FINGERPRINT';}
+
 	/**
 	 * 2016-09-07
 	 * @override
@@ -230,30 +259,4 @@ final class Charge extends \Df\PaypalClone\Charge {
 		// «Payee’s zip/post code»
 		,'EPS_ZIPCODE' => $this->addressSB()->getPostcode()
 	];}
-
-	/**
-	 * 2016-08-29
-	 * 2016-08-26
-	 * «5.1.1.4 Payment Reference».
-	 * Mandatory
-	 * String, min length 1, max length 60
-	 * «A string that identifies the transaction.
-	 * This string is stored by SecurePay as the Transaction Reference.
-	 * This field is typically a shopping cart id or invoice number
-	 * and is used to match the SecurePay transaction to your application.»
-	 * @override
-	 * @see \Df\PaypalClone\Charge::k_RequestId()
-	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @return string
-	 */
-	protected function k_RequestId() {return 'EPS_REFERENCEID';}
-
-	/**
-	 * 2016-08-27
-	 * @override
-	 * @see \Df\PaypalClone\Charge::k_Signature()
-	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @return string
-	 */
-	protected function k_Signature() {return 'EPS_FINGERPRINT';}
 }
