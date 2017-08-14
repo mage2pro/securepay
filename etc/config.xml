@@ -6,25 +6,30 @@
 	<default>
 		<df_payment>
 			<secure_pay>
-				<!--
-					2016-08-22
-					Значением этой опции по умолчанию и так является true:
-					@see \Df\Payment\Settings::requireBillingAddress()
-					Однако здесь это значение всё равно нужно указать,
-					чтобы галка была установлена для чекбокса.
-				-->
-				<requireBillingAddress>1</requireBillingAddress>
 				<currency>order</currency>
 				<forceResult>approve</forceResult>
+<!-- 2017-08-13
+*) Param name: `EPS_REFERENCEID`
+*) Param type and limitations: «String, min length 1, max length 60»
+*) Reference: Part 5.1.1.4 «Payment Reference». (page 25) of the PDF documentation
+(«Direct Post Integration Guide», Version 1.4, 2017-02-28): https://mage2.pro/t/4271
+@see \Dfe\SecurePay\Charge::k_RequestId() https://github.com/mage2pro/securepay/blob/1.5.15/Charge.php#L15-L30
+-->
+				<identification_rules>
+					<max_length>60</max_length>
+				</identification_rules>
 				<log>1</log>
-				<!--
-					2016-08-26
-					«Secure XML API Integration Guide»
-					https://www.securepay.com.au/_uploads/files/Secure_XML_API_Integration_Guide.pdf
-					«2.2 How to use the Test Environment»
-					https://mage2.pro/t/1976/11
-					https://www.concrete5.org/marketplace/addons/ecommerce-securepay-direct-post-redirect-payment-method/documentation
-				-->
+<!-- 2016-08-22
+Значением этой опции по умолчанию и так является true: @see \Df\Payment\Settings::requireBillingAddress()
+Однако здесь это значение всё равно нужно указать, чтобы галка была установлена для чекбокса.
+-->
+				<requireBillingAddress>1</requireBillingAddress>
+<!-- 2016-08-26
+«Secure XML API Integration Guide», Version 1.2 (2016-12-01),
+Chapter 2.2 «How to use the Test Environment» (page 5): https://mage2.pro/t/4270
+https://mage2.pro/t/1976/11
+https://www.concrete5.org/marketplace/addons/ecommerce-securepay-direct-post-redirect-payment-method/documentation
+-->
 				<testMerchantID>ABC0001</testMerchantID>
 				<testTransactionPassword>abc123</testTransactionPassword>
 				<title>Bank Card</title>
