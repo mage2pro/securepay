@@ -13,6 +13,25 @@ namespace Dfe\SecurePay;
  */
 final class Charge extends \Df\PaypalClone\Charge {
 	/**
+	 * 2017-08-19   
+	 * 2016-08-26
+	 * «5.1.1.1 Merchant ID».
+	 * Mandatory
+	 * Alpha-numeric, length 7
+	 * «The Merchant ID field, “EPS_MERCHANT”, is mandatory.
+	 * It is the SecurePay account to process payments.
+	 * SecurePay Customer Support will supply your Merchant ID when your account is activated.
+	 * The Merchant ID will be of the format “ABC0010”,
+	 * where ABC is your unique three-letter account code,
+	 * also used for logging in to the SecurePay Merchant Log In.»
+	 * @override
+	 * @see \Df\PaypalClone\Charge::k_MerchantId()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @return string
+	 */
+	protected function k_MerchantId() {return 'EPS_MERCHANT';}
+	
+	/**
 	 * 2016-08-29
 	 * 2016-08-26
 	 * «5.1.1.4 Payment Reference».
@@ -132,17 +151,6 @@ final class Charge extends \Df\PaypalClone\Charge {
 		// String, length less than 30
 		// «Payee’s last name»
 		,'EPS_LASTNAME' => $this->customerNameL()
-		// 2016-08-26
-		// «5.1.1.1 Merchant ID».
-		// Mandatory
-		// Alpha-numeric, length 7
-		// «The Merchant ID field, “EPS_MERCHANT”, is mandatory.
-		// It is the SecurePay account to process payments.
-		// SecurePay Customer Support will supply your Merchant ID when your account is activated.
-		// The Merchant ID will be of the format “ABC0010”,
-		// where ABC is your unique three-letter account code,
-		// also used for logging in to the SecurePay Merchant Log In.»
-		,'EPS_MERCHANT' => $s->merchantID()
 		// 2016-08-26
 		// Mandatory when EPS_TXNTYPE includes 3D Secure
 		// String, length less than 20
