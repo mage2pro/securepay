@@ -43,6 +43,16 @@ final class Charge extends \Df\PaypalClone\Charge {
 	protected function k_Currency() {return 'EPS_CURRENCY';}
 
 	/**
+	 * 2017-08-19
+	 * 2016-08-26 «Payee’s email address». Optional.
+	 * @override
+	 * @see \Df\PaypalClone\Charge::k_Email()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @return string
+	 */
+	protected function k_Email() {return 'EPS_EMAILADDRESS';}
+
+	/**
 	 * 2017-08-19   
 	 * 2016-08-26
 	 * «5.1.1.1 Merchant ID».
@@ -143,11 +153,6 @@ final class Charge extends \Df\PaypalClone\Charge {
 		// String, length 2, ISO 4217 currency code
 		// «Order delivery country two letter code»
 		,'EPS_DELIVERYCOUNTRY' => !$this->addressS() ? null : $this->addressS()->getCountryId()
-		// 2016-08-26
-		// Optional
-		// String, length 2, ISO 4217 currency code
-		// «Payee’s email address»
-		,'EPS_EMAILADDRESS' => $this->customerEmail()
 		// 2016-08-26
 		// Optional
 		// String, length less than 30
