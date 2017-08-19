@@ -25,6 +25,24 @@ final class Charge extends \Df\PaypalClone\Charge {
 	protected function k_Amount() {return 'EPS_AMOUNT';}
 
 	/**
+	 * 2017-08-19  
+	 * 2016-08-26
+	 * «5.1.1.12 Currency».
+	 * Optional (default AUD)
+	 * «If your bank supports multicurrency,
+	 * you may optionally set the currency of the transaction to one other than AUD.»
+	 * «Used to set the transaction currency sent to the bank for processing.
+	 * You must have a bank merchant facility
+	 * that accepts currencies other than AUD before using this feature.
+	 * Set the currency to any ISO 4217 three letter currency code. E.g. USD, NZD, GBP, etc.»
+	 * @override
+	 * @see \Df\PaypalClone\Charge::k_Currency()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @return string
+	 */
+	protected function k_Currency() {return 'EPS_CURRENCY';}
+
+	/**
 	 * 2017-08-19   
 	 * 2016-08-26
 	 * «5.1.1.1 Merchant ID».
@@ -120,16 +138,6 @@ final class Charge extends \Df\PaypalClone\Charge {
 		// в личном кабинете магазина.
 		// Поэтому оставил EPS_CALLBACKURL.
 		,'EPS_CALLBACKURL' => $this->callback()
-		// 2016-08-26
-		// «5.1.1.12 Currency».
-		// Optional (default AUD)
-		// «If your bank supports multicurrency,
-		// you may optionally set the currency of the transaction to one other than AUD.»
-		// «Used to set the transaction currency sent to the bank for processing.
-		// You must have a bank merchant facility
-		// that accepts currencies other than AUD before using this feature.
-		// Set the currency to any ISO 4217 three letter currency code. E.g. USD, NZD, GBP, etc.»
-		,'EPS_CURRENCY' => $this->currencyC()
 		// 2016-08-26
 		// Optional
 		// String, length 2, ISO 4217 currency code
