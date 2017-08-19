@@ -239,11 +239,8 @@ final class Charge extends \Df\PaypalClone\Charge {
 		 * https://github.com/thephpleague/omnipay-securepay/blob/v2.1.0/src/Message/DirectPostAuthorizeRequest.php#L22
 		 */
 		,'EPS_TIMESTAMP' => gmdate('YmdHis')
-		// 2016-08-26
-		// Optional
-		// String, length less than 30
-		// «Payee’s town»
-		,'PS_TOWN' => $this->addressSB()->getCity()
+		// 2016-08-26 «Payee’s town». Optional. String, length less than 30.
+		,'PS_TOWN' => $this->addressB()->getCity()
 		/**
 		 * 2016-08-26
 		 * «5.1.1.2 Transaction Type».
@@ -282,10 +279,7 @@ final class Charge extends \Df\PaypalClone\Charge {
 		 * 		See section 3.4.4.4. for more details».
 		 */
 		,'EPS_TXNTYPE' => 0
-		// 2016-08-26
-		// Optional
-		// String, length less than 30
-		// «Payee’s zip/post code»
-		,'EPS_ZIPCODE' => $this->addressSB()->getPostcode()
+		// 2016-08-26 «Payee’s zip/post code». Optional. String, length less than 30.
+		,'EPS_ZIPCODE' => $this->addressB()->getPostcode()
 	];}
 }
