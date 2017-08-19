@@ -13,6 +13,18 @@ namespace Dfe\SecurePay;
  */
 final class Charge extends \Df\PaypalClone\Charge {
 	/**
+	 * 2017-08-19
+	 * 2016-08-26
+	 * «5.1.1.2 Transaction Amount». Mandatoryю Numeric, two decimal places, from 0.01 to 99999999.99.
+	 * «The total amount of the purchase transaction. By default the currency is AUD (Australian Dollars).»
+	 * @override
+	 * @see \Df\PaypalClone\Charge::k_Amount()
+	 * @used-by \Df\PaypalClone\Charge::p()
+	 * @return string
+	 */
+	protected function k_Amount() {return 'EPS_AMOUNT';}
+
+	/**
 	 * 2017-08-19   
 	 * 2016-08-26
 	 * «5.1.1.1 Merchant ID».
@@ -72,7 +84,7 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * @return string
 	 */
 	protected function amountFormat($a) {return df_f2(parent::amountFormat($a));}
-
+	
 	/**
 	 * 2016-08-26
 	 * @override
@@ -90,13 +102,6 @@ final class Charge extends \Df\PaypalClone\Charge {
 		// Any ASCII characters may be used to build this string.
 		// E.g. May comprise of a timestamp padded with 0s for uniqueness: "20110714112034872000".»
 		'3D_XID' => str_pad($this->id(), 20, '0')
-		// 2016-08-26
-		// «5.1.1.2 Transaction Amount».
-		// Mandatory
-		// Numeric, two decimal places, from 0.01 to 99999999.99
-		// «The total amount of the purchase transaction.
-		// By default the currency is AUD (Australian Dollars).»
-		,'EPS_AMOUNT' => $this->amountF()
 		// 2016-08-26
 		// Optional
 		// String, length 2, ISO 4217 currency code
