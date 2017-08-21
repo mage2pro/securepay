@@ -5,8 +5,7 @@ namespace Dfe\SecurePay\Init;
 final class Action extends \Df\PaypalClone\Init\Action {
 	/**
 	 * 2016-08-27
-	 * 2017-02-16
-	 * SecurePay has changed the URL for Direct Post API testing: https://mage2.pro/t/2779
+	 * 2017-02-16 SecurePay has changed the URL for Direct Post API testing: https://mage2.pro/t/2779
 	 * @override
 	 * @see \Df\Payment\Init\Action::redirectUrl()
 	 * @used-by \Df\Payment\Init\Action::action()
