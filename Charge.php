@@ -111,7 +111,7 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * @param float $a
 	 * @return string
 	 */
-	protected function amountFormat($a) {return df_f2(parent::amountFormat($a));}
+	protected function amountFormat($a) {return dff_2(parent::amountFormat($a));}
 	
 	/**
 	 * 2016-08-26
