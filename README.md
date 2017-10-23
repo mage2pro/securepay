@@ -16,7 +16,6 @@ Just order my [free installation service](https://mage2.pro/t/3585).
 ```
 composer require mage2pro/securepay:*
 bin/magento setup:upgrade
-rm -rf pub/static/* && bin/magento setup:static-content:deploy <locale, e.g.: en_AU>
 rm -rf pub/static/* && bin/magento setup:static-content:deploy en_US en_AU <additional locales, e.g.: zh_Hans_CN>
 rm -rf var/di var/generation generated/code && bin/magento setup:di:compile
 ```
