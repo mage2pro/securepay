@@ -152,7 +152,7 @@ final class Charge extends \Df\PaypalClone\Charge {
 		// Optional
 		// String, length 2, ISO 4217 currency code
 		// «Order delivery country two letter code»
-		,'EPS_DELIVERYCOUNTRY' => !$this->addressS() ? null : $this->addressS()->getCountryId()
+		,'EPS_DELIVERYCOUNTRY' => $this->addressS(true)->getCountryId()
 		// 2016-08-26
 		// Optional
 		// String, length less than 30
