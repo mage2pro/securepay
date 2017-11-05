@@ -16,21 +16,16 @@ return parent.extend({
 	 * @returns {String}
 	 */
 	debugMessage: df.c(function() {
-		/** @type {String} */
-		var forceResult = this.config('forceResult');
-		/** @type {Boolean} */
-		var approved = -1 !== ['00', '08', '11', '16'].indexOf(this.amountLast2());
-		/** @type {Boolean} */
-		var approve = 'approve' === forceResult;
-		/** @type {Boolean} */
-		var needAdjust = ('no' !== forceResult) && (approve !== approved);
+		/** @type {String} */ var forceResult = this.config('forceResult');
+		/** @type {Boolean} */ var approved = -1 !== ['00', '08', '11', '16'].indexOf(this.amountLast2());
+		/** @type {Boolean} */ var approve = 'approve' === forceResult;
+		/** @type {Boolean} */ var needAdjust = ('no' !== forceResult) && (approve !== approved);
 		/**
 		 * @param {Boolean} approved
 		 * @returns {String}
 		 */
 		function label(approved) {return df.t(approved ? 'approved' : 'declined');}
-		/** @type {String} */
-		var result;
+		/** @type {String} */ var result;
 		if (!needAdjust) {
 			result = df.t(
 				'The transaction will be <b>{result}</b>, because the payment amount (<b>{amount}</b>) in the payment currency (<b>{currency}</b>) ends with «<b>{last2}</b>».'
@@ -43,10 +38,8 @@ return parent.extend({
 			);
 		}
 		else {
-			/** @type {Number} */
-			var currentA = this.amountP();
-			/** @type {Number} */
-			var newA = approve ? Math.round(currentA) : currentA + 0.01;
+			/** @type {Number} */ var currentA = this.amountP();
+			/** @type {Number} */ var newA = approve ? Math.round(currentA) : currentA + 0.01;
 			result = df.t(
 				'The payment amount in the payment currency (<b>{currency}</b>) will be adjusted from <b>{current}</b> to <b>{new}</b> for the transaction to be <b>{result}</b>.'
 				,{
