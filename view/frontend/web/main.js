@@ -11,6 +11,10 @@ return parent.extend({
 	 * If the payment amount ends in 00, 08, 11 or 16,
 	 * the transaction will be approved once card details are submitted.
 	 * All other options will cause a declined transaction.»
+	 * 2017-11-05
+	 * «A payment's amount could be changed client-side (e.g., after a discount code application),
+	 * and we should recall `Dfe_SecurePay/main::debugMessage()` in such case
+	 * (though, it affects omly the test mode)»: https://github.com/mage2pro/securepay/issues/3
 	 * @override
 	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
 	 * @returns {String}
