@@ -1,4 +1,4 @@
-The extension integrates your Magento 2 store with the **[SecurePay](https://www.securepay.com.au)** Australian payment service.
+The extension integrates your Magento 2 based webstore with the **[SecurePay](https://www.securepay.com.au)** Australian payment service.
 
 ## Demo videos
 
