@@ -6,6 +6,12 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 final class Method extends \Df\PaypalClone\Method {
 	/**
 	 * 2016-08-31
+	 * 2017-11-14
+	 * AlphaCommerceHub (another Australian payment service provider)
+	 * has a similar rule: @see \Dfe\AlphaCommerceHub\Method::amountFormat()
+	 * "The last 3 digits of every payment amount should be «000» in the test mode for Westpac":
+	 * https://github.com/mage2pro/alphacommercehub/issues/17
+	 * https://github.com/mage2pro/alphacommercehub/blob/0.2.8/Method.php#L5-L26
 	 * @override
 	 * @see \Df\Payment\Method::amountFormat()
 	 * @param float $a
@@ -13,10 +19,8 @@ final class Method extends \Df\PaypalClone\Method {
 	 */
 	function amountFormat($a) {
 		if ($this->test()) {
-			/** @var bool $approved */
-			$approved = in_array(dfp_last2($a), ['00', '08', '11', '16']);
-			/** @var bool $approve */
-			/** @var string $forceResult */
+			$approved = in_array(dfp_last2($a), ['00', '08', '11', '16']); /** @var bool $approved */
+			/** @var bool $approve */ /** @var string $forceResult */
 			$approve = 'approve' === ($forceResult = $this->s()->forceResult());
 			if ('no' !== $forceResult && $approve !== $approved) {
 				$a = $approve ? round($a) : $a + 0.01;
