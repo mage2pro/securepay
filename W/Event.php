@@ -42,7 +42,7 @@ final class Event extends \Df\PaypalClone\W\Event {
 	 * 2017-01-18
 	 * @override
 	 * @see \Df\PaypalClone\W\Event::k_statusT()
-	 * @used-by \Df\PaypalClone\W\Event::logTitleSuffix()
+	 * @used-by \Df\PaypalClone\W\Event::statusT()
 	 * @return string|null
 	 */
 	protected function k_statusT() {return 'restext';}
