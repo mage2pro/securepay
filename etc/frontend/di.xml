@@ -17,4 +17,6 @@
 			</argument>
 		</arguments>
 	</type>
+	<virtualType name='Dfe\SecurePay\Controller\Confirm\Index' type='Df\Payment\W\Action'/>
+	<virtualType name='Dfe\SecurePay\Controller\CustomerReturn\Index' type='Df\Payment\CustomerReturn'/>
 </config>
