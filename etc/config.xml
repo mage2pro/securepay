@@ -38,7 +38,13 @@ https://www.concrete5.org/marketplace/addons/ecommerce-securepay-direct-post-red
 		</df_payment>
 		<payment>
 			<dfe_secure_pay>
-
+<!-- 2017-12-05
+"The module is not shown in the «Mageplaza Extensions» → «One Step Checkout» →
+«General Configuration» → «Default Payment Method» Magento 2 backend dropdown":
+https://github.com/mage2pro/securepay/issues/4
+https://github.com/mage2pro/stripe/blob/2.5.2/etc/config.xml#L52-L120
+-->
+				<active>1</active>
 <!-- 2017-07-24
 @used-by \Magento\Payment\Helper\Data::getMethodModelConfigName():
 	protected function getMethodModelConfigName($code) {
