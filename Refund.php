@@ -22,11 +22,8 @@ final class Refund extends \Df\Payment\Operation {
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 */
 	private function process() {
-		/** @var Settings $s */
-		$s = $this->s();
-		/** @var TM $tm */
-		$tm = df_tm($this->m());
-		/** @var string $xA */
+		$s = $this->s(); /** @var Settings $s */
+		$tm = df_tm($this->m()); /** @var TM $tm */
 		$xA = df_xml_g('SecurePayMessage', [
 			'MessageInfo' => [
 				'messageID' => df_cdata(df_cc('-', $this->id(), df_uid(4)))
@@ -47,32 +44,23 @@ final class Refund extends \Df\Payment\Operation {
 					])
 				])
 			]
-		]);
-		/** @var \Zend_Http_Client $c */
+		]); /** @var string $xA */
 		$c = df_zf_http(dfp_url_api($this, 'https://{stage}.securepay.com.au/xmlapi/payment', ['test', 'api']))
 			// 2017-06-28
 			// «Difference between the Accept and Content-Type HTTP headers»
 			// https://webmasters.stackexchange.com/questions/31212
 			->setHeaders(array_fill_keys(['accept', 'content-type'], 'text/xml'))
 			->setRawData($xA)
-		;
-		/** @var string $xB */
-		$xB = $c->request(\Zend_Http_Client::POST)->getBody();
-		/** @var string $xAL */
-		$xAL = df_xml_prettify(str_replace($s->password(), '*****', $xA));
-		/** @var string $xBL */
-		$xBL = df_xml_prettify($xB);
+		; /** @var \Zend_Http_Client $c */
+		$xB = $c->request(\Zend_Http_Client::POST)->getBody(); /** @var string $xB */
+		$xAL = df_xml_prettify(str_replace($s->password(), '*****', $xA)); /** @var string $xAL */
+		$xBL = df_xml_prettify($xB); /** @var string $xBL */
 		$this->m()->iiaSetTRR($xAL, $xBL);
-		/** @var X $xxB */
-		$xxB = df_xml_parse($xB);
-		/** @var X $status */
-		$status = $xxB->{'Status'};
-		/** @var string $code */
-		$code = df_leaf_sne($status->{'statusCode'});
-		/** @var $errorMessage */
-		$errorMessage = null;
+		$xxB = df_xml_parse($xB); /** @var X $xxB */
+		$status = $xxB->{'Status'}; /** @var X $status */
+		$code = df_leaf_sne($status->{'statusCode'}); /** @var string $code */
+		$errorMessage = null; /** @var $errorMessage */
 		if ('000' !== $code) {
-			/** @var string $message */
 			$errorMessage = df_leaf_sne($status->{'statusDescription'});
 		}
 		else {
@@ -100,8 +88,7 @@ final class Refund extends \Df\Payment\Operation {
 			//		<thinlinkResponseText>000</thinlinkResponseText>
 			//		<thinlinkEventStatusCode>999</thinlinkEventStatusCode>
 			//		<thinlinkEventStatusText>Error - Transaction Already Fully Refunded/Only $x.xx Available for Refund</thinlinkEventStatusText>
-			/** @var X $txn */
-			$txn = $xxB->{'Payment'}->{'TxnList'}->{'Txn'};
+			$txn = $xxB->{'Payment'}->{'TxnList'}->{'Txn'};/** @var X $txn */
 			if ('Yes' !== df_leaf_sne($txn->{'approved'})) {
 				$errorMessage = df_leaf_sne($txn->{'thinlinkEventStatusText'});
 			}
@@ -122,9 +109,9 @@ final class Refund extends \Df\Payment\Operation {
 	 * https://github.com/thephpleague/omnipay-securepay/blob/a7b1b5/src/Message/SecureXMLAbstractRequest.php#L124-L138
 	 * @return string
 	 */
-	private function timestamp() {/** @var \DateTime $d */ $d = new \DateTime; return $d->format(
-		sprintf('YmdHis000%+04d', $d->format('Z') / 60)
-	);}
+	private function timestamp() {/** @var \DateTime $d */ $d = new \DateTime; return $d->format(sprintf(
+		'YmdHis000%+04d', $d->format('Z') / 60
+	));}
 
 	/**
 	 * 2016-08-27
@@ -132,8 +119,7 @@ final class Refund extends \Df\Payment\Operation {
 	 * @return string
 	 */
 	static function p(Method $m) {
-		/** @var self $i */
-		$i = new self(new SCreditmemo($m));
+		$i = new self(new SCreditmemo($m)); /** @var self $i */
 		$i->process();
 		return $i->id();
 	}
