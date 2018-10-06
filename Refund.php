@@ -3,7 +3,6 @@ namespace Dfe\SecurePay;
 use Df\Payment\Operation\Source\Creditmemo as SCreditmemo;
 use Df\Payment\TM;
 use Df\Xml\X;
-use Magento\Sales\Model\Order\Payment\Transaction as T;
 // 2016-08-30
 /** @method Method m() */
 final class Refund extends \Df\Payment\Operation {
