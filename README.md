@@ -14,12 +14,35 @@ Just order my [free installation service](https://mage2.pro/t/3585).
 
 ### 2. Self-installation
 ```
+bin/magento maintenance:enable
+rm -rf composer.lock
+composer clear-cache
 composer require mage2pro/securepay:*
 bin/magento setup:upgrade
-rm -rf pub/static/* && bin/magento setup:static-content:deploy en_US en_AU <additional locales, e.g.: zh_Hans_CN>
-rm -rf var/di var/generation generated/code && bin/magento setup:di:compile
+rm -rf var/di var/generation generated/code
+bin/magento setup:di:compile
+rm -rf pub/static/*
+bin/magento setup:static-content:deploy -f en_US en_AU
+bin/magento maintenance:disable
+bin/magento cache:enable
 ```
 If you have problems with these commands, please check the [detailed instruction](https://mage2.pro/t/263).
+
+## How to upgrade
+```
+bin/magento maintenance:enable
+composer remove mage2pro/securepay
+rm -rf composer.lock
+composer clear-cache
+composer require mage2pro/securepay:*
+bin/magento setup:upgrade
+rm -rf var/di var/generation generated/code
+bin/magento setup:di:compile
+rm -rf pub/static/*
+bin/magento setup:static-content:deploy -f en_US en_AU
+bin/magento maintenance:disable
+bin/magento cache:enable
+```
 
 ## Licensing
 It is a paid extension, not free.  
