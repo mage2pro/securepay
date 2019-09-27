@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd"
 >
 	<router id='standard'>
-		<route id='Dfe_SecurePay' frontName='dfe-securepay'>
+		<route frontName='dfe-securepay' id='Dfe_SecurePay'>
 			<module name='Dfe_SecurePay'/>
 		</route>
 	</router>
