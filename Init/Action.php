@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\SecurePay\Init;
-// 2017-03-21
+# 2017-03-21
 /** @method \Dfe\SecurePay\Method m() */
 final class Action extends \Df\PaypalClone\Init\Action {
 	/**

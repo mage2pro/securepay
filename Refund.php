@@ -3,7 +3,7 @@ namespace Dfe\SecurePay;
 use Df\Payment\Operation\Source\Creditmemo as SCreditmemo;
 use Df\Payment\TM;
 use Df\Xml\X;
-// 2016-08-30
+# 2016-08-30
 /** @method Method m() */
 final class Refund extends \Df\Payment\Operation {
 	/**
@@ -45,9 +45,9 @@ final class Refund extends \Df\Payment\Operation {
 			]
 		]); /** @var string $xA */
 		$c = df_zf_http(dfp_url_api($this, 'https://{stage}.securepay.com.au/xmlapi/payment', ['test', 'api']))
-			// 2017-06-28
-			// «Difference between the Accept and Content-Type HTTP headers»
-			// https://webmasters.stackexchange.com/questions/31212
+			# 2017-06-28
+			# «Difference between the Accept and Content-Type HTTP headers»
+			# https://webmasters.stackexchange.com/questions/31212
 			->setHeaders(array_fill_keys(['accept', 'content-type'], 'text/xml'))
 			->setRawData($xA)
 		; /** @var \Zend_Http_Client $c */
@@ -63,15 +63,15 @@ final class Refund extends \Df\Payment\Operation {
 			$errorMessage = df_leaf_sne($status->{'statusDescription'});
 		}
 		else {
-			// 2016-09-01
-			// При повторной попытке возврата SecurePay всё равно возвращает:
+			# 2016-09-01
+			# При повторной попытке возврата SecurePay всё равно возвращает:
 			//	<Status>
 			//		<statusCode>000</statusCode>
 			//		<statusDescription>Normal</statusDescription>
 			//	</Status>
 			//
-			// Поэтому допольнительно смотрим другой кусок ответа: Payment/TxnList/Txn
-			// В случае успеха там:
+			# Поэтому допольнительно смотрим другой кусок ответа: Payment/TxnList/Txn
+			# В случае успеха там:
 			//		<approved>Yes</approved>
 			//		<responseCode>00</responseCode>
 			//		<responseText>Approved</responseText>
@@ -79,7 +79,7 @@ final class Refund extends \Df\Payment\Operation {
 			//		<thinlinkResponseText>000</thinlinkResponseText>
 			//		<thinlinkEventStatusCode>000</thinlinkEventStatusCode>
 			//		<thinlinkEventStatusText>Normal</thinlinkEventStatusText>
-			// В случае сбоя там:
+			# В случае сбоя там:
 			//		<approved>No</approved>
 			//		<responseCode>134</responseCode>
 			//		<responseText>Transaction already fully refunded</responseText>
@@ -93,9 +93,9 @@ final class Refund extends \Df\Payment\Operation {
 			}
 		}
 		if ($errorMessage) {
-			// 2016-09-01
-			// Из-за бага в ядре исключительная ситуация при refund не только не логируется,
-			// а и вообще теряется. Поэтому мы и логируем её сами.
+			# 2016-09-01
+			# Из-за бага в ядре исключительная ситуация при refund не только не логируется,
+			# а и вообще теряется. Поэтому мы и логируем её сами.
 			dfp_report($this, $xAL, 'request');
 			dfp_report($this, $xBL, 'response');
 			df_error($errorMessage);

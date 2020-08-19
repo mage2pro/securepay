@@ -1,5 +1,5 @@
 <?php
-// 2016-08-25
+# 2016-08-25
 namespace Dfe\SecurePay;
 /** @method Settings s() */
 final class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {

@@ -1,5 +1,5 @@
 <?php
-// 2016-08-25
+# 2016-08-25
 namespace Dfe\SecurePay;
 /** @method static Settings s() */
 final class Settings extends \Df\Payment\Settings\BankCard {

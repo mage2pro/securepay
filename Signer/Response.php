@@ -2,7 +2,7 @@
 namespace Dfe\SecurePay\Signer;
 use Df\Payment\Method as M;
 use Df\Payment\W\F;
-// 2016-08-27
+# 2016-08-27
 final class Response extends \Dfe\SecurePay\Signer {
 	/**
 	 * 2016-08-27

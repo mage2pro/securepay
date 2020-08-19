@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\SecurePay\W;
-// 2017-03-16
+# 2017-03-16
 final class Event extends \Df\PaypalClone\W\Event {
 	/**
 	 * 2017-03-16
