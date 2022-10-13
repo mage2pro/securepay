@@ -15,7 +15,7 @@ Just order my [free installation service](https://mage2.pro/t/3585).
 ### 2. Self-installation
 ```
 bin/magento maintenance:enable
-rm -r composer.lock
+rm -f composer.lock
 composer clear-cache
 composer require mage2pro/securepay:*
 bin/magento setup:upgrade
@@ -32,7 +32,7 @@ If you have problems with these commands, please check the [detailed instruction
 ```
 bin/magento maintenance:enable
 composer remove mage2pro/securepay
-rm -r composer.lock
+rm -f composer.lock
 composer clear-cache
 composer require mage2pro/securepay:*
 bin/magento setup:upgrade
