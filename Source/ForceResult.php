@@ -13,5 +13,5 @@ final class ForceResult extends \Df\Config\Source {
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	protected function map() {return ['no' => 'No', 'approve' => 'Approve', 'decline' => 'Decline'];}
+	protected function map():array {return ['no' => 'No', 'approve' => 'Approve', 'decline' => 'Decline'];}
 }
