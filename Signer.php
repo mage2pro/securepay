@@ -9,7 +9,7 @@ namespace Dfe\SecurePay;
 abstract class Signer extends \Df\PaypalClone\Signer {
 	/**
 	 * 2016-08-27
-	 * @used-by sign()
+	 * @used-by self::sign()
 	 * @see \Dfe\SecurePay\Signer\Request::values()
 	 * @see \Dfe\SecurePay\Signer\Response::values()
 	 * @return string[]
@@ -24,7 +24,5 @@ abstract class Signer extends \Df\PaypalClone\Signer {
 	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @return string
 	 */
-	final protected function sign() {return sha1(implode('|', dfa_insert(
-		$this->values(), 1, $this->s()->password()
-	)));}
+	final protected function sign() {return sha1(implode('|', dfa_insert($this->values(), 1, $this->s()->password())));}
 }
