@@ -111,7 +111,6 @@ final class Refund extends \Df\Payment\Operation {
 
 	/**
 	 * 2016-08-27
-	 * @param Method $m
 	 * @return string
 	 */
 	static function p(Method $m) {
