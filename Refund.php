@@ -111,9 +111,8 @@ final class Refund extends \Df\Payment\Operation {
 
 	/**
 	 * 2016-08-27
-	 * @return string
 	 */
-	static function p(Method $m) {
+	static function p(Method $m):string {
 		$i = new self(new SCreditmemo($m)); /** @var self $i */
 		$i->process();
 		return $i->id();
