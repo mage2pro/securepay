@@ -111,6 +111,7 @@ final class Refund extends \Df\Payment\Operation {
 
 	/**
 	 * 2016-08-27
+	 * @used-by \Dfe\SecurePay\Method::_refund()
 	 */
 	static function p(Method $m):string {
 		$i = new self(new SCreditmemo($m)); /** @var self $i */
