@@ -6,6 +6,7 @@ final class Settings extends \Df\Payment\Settings\BankCard {
 	/**
 	 * 2016-08-26 «Mage2.PRO» → «Payment» → «SecurePay» → «Enable 3D Secure Validation?»
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
+	 * @used-by \Dfe\SecurePay\Settings::enable3DS()
 	 */
 	function enable3DS():bool {return $this->b();}
 
