@@ -17,7 +17,7 @@ final class Method extends \Df\PaypalClone\Method {
 	 * @param float $a
 	 * @return float
 	 */
-	function amountFormat($a) {
+	function amountFormat(float $a) {
 		if ($this->test()) {
 			$approved = in_array(dfp_last2($a), ['00', '08', '11', '16']); /** @var bool $approved */
 			/** @var bool $approve */ /** @var string $forceResult */
