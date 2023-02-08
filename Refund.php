@@ -104,9 +104,8 @@ final class Refund extends \Df\Payment\Operation {
 	 * 2016-08-31
 	 * API requires the timezone offset in minutes
 	 * https://github.com/thephpleague/omnipay-securepay/blob/a7b1b5/src/Message/SecureXMLAbstractRequest.php#L124-L138
-	 * @return string
 	 */
-	private function timestamp() {/** @var \DateTime $d */ $d = new \DateTime; return $d->format(sprintf(
+	private function timestamp():string {/** @var \DateTime $d */ $d = new \DateTime; return $d->format(sprintf(
 		'YmdHis000%+04d', $d->format('Z') / 60
 	));}
 
