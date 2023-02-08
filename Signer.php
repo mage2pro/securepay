@@ -14,7 +14,7 @@ abstract class Signer extends \Df\PaypalClone\Signer {
 	 * @see \Dfe\SecurePay\Signer\Response::values()
 	 * @return string[]
 	 */
-	abstract protected function values();
+	abstract protected function values():array;
 
 	/**
 	 * 2016-08-27
@@ -22,7 +22,6 @@ abstract class Signer extends \Df\PaypalClone\Signer {
 	 * @override
 	 * @see \Df\PaypalClone\Signer::sign()
 	 * @used-by \Df\PaypalClone\Signer::_sign()
-	 * @return string
 	 */
-	final protected function sign() {return sha1(implode('|', dfa_insert($this->values(), 1, $this->s()->password())));}
+	final protected function sign():string {return sha1(implode('|', dfa_insert($this->values(), 1, $this->s()->password())));}
 }

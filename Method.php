@@ -56,18 +56,16 @@ final class Method extends \Df\PaypalClone\Method {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Invoice/Validation/CanRefund.php#L84-L94
 	 * It is since Magento 2.2: https://github.com/magento/magento2/commit/767151b4
-	 * @return bool
 	 */
-	function canRefund() {return true;}
+	function canRefund():bool {return true;}
 
 	/**
 	 * 2016-08-30
 	 * @override
 	 * @see \Df\Payment\Method::_refund()
 	 * @used-by \Df\Payment\Method::refund()
-	 * @param float|null $amt
 	 */
-	protected function _refund($amt) {$this->ii()->setTransactionId($this->tid()->e2i(Refund::p($this)));}
+	protected function _refund(float $a):void {$this->ii()->setTransactionId($this->tid()->e2i(Refund::p($this)));}
 
 	/**
 	 * 2017-02-08

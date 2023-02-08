@@ -11,10 +11,9 @@ final class Refund extends \Df\Payment\Operation {
 	 * @override
 	 * @see \Df\Payment\Operation::amountFormat()
 	 * @used-by \Df\Payment\Operation::amountF()
-	 * @param float $a
 	 * @return int
 	 */
-	protected function amountFormat($a) {return round(100 * parent::amountFormat($a));}
+	protected function amountFormat(float $a) {return round(100 * parent::amountFormat($a));}
 
 	/**
 	 * 2016-08-20

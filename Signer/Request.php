@@ -20,7 +20,7 @@ final class Request extends \Dfe\SecurePay\Signer {
 	 * @used-by \Dfe\SecurePay\Signer::sign()
 	 * @return string[]
 	 */
-	protected function values() {return dfa($this->v(), array_merge(
+	protected function values():array {return $this->v(array_merge(
 		['EPS_MERCHANT', 'EPS_TXNTYPE'],
 		8 === $this->v('EPS_TXNTYPE') ? ['EPS_STORETYPE', 'REFERENCEID'] : ['EPS_REFERENCEID', 'EPS_AMOUNT'],
 		['EPS_TIMESTAMP']

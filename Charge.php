@@ -20,9 +20,8 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * @override
 	 * @see \Df\PaypalClone\Charge::k_Amount()
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @return string
 	 */
-	protected function k_Amount() {return 'EPS_AMOUNT';}
+	protected function k_Amount():string {return 'EPS_AMOUNT';}
 
 	/**
 	 * 2017-08-19  
@@ -38,9 +37,8 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * @override
 	 * @see \Df\PaypalClone\Charge::k_Currency()
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @return string
 	 */
-	protected function k_Currency() {return 'EPS_CURRENCY';}
+	protected function k_Currency():string {return 'EPS_CURRENCY';}
 
 	/**
 	 * 2017-08-19
@@ -48,9 +46,8 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * @override
 	 * @see \Df\PaypalClone\Charge::k_Email()
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @return string
 	 */
-	protected function k_Email() {return 'EPS_EMAILADDRESS';}
+	protected function k_Email():string {return 'EPS_EMAILADDRESS';}
 
 	/**
 	 * 2017-08-19   
@@ -67,9 +64,8 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * @override
 	 * @see \Df\PaypalClone\Charge::k_MerchantId()
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @return string
 	 */
-	protected function k_MerchantId() {return 'EPS_MERCHANT';}
+	protected function k_MerchantId():string {return 'EPS_MERCHANT';}
 	
 	/**
 	 * 2016-08-29
@@ -84,18 +80,16 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * @override
 	 * @see \Df\PaypalClone\Charge::k_RequestId()
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @return string
 	 */
-	protected function k_RequestId() {return 'EPS_REFERENCEID';}
+	protected function k_RequestId():string {return 'EPS_REFERENCEID';}
 
 	/**
 	 * 2016-08-27
 	 * @override
 	 * @see \Df\PaypalClone\Charge::k_Signature()
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @return string
 	 */
-	protected function k_Signature() {return 'EPS_FINGERPRINT';}
+	protected function k_Signature():string {return 'EPS_FINGERPRINT';}
 
 	/**
 	 * 2016-09-07
@@ -108,10 +102,9 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * Numeric, two decimal places, from 0.01 to 99999999.99
 	 * «The total amount of the purchase transaction.
 	 * By default the currency is AUD (Australian Dollars).»
-	 * @param float $a
 	 * @return string
 	 */
-	protected function amountFormat($a) {return dff_2(parent::amountFormat($a));}
+	protected function amountFormat(float $a) {return dff_2(parent::amountFormat($a));}
 	
 	/**
 	 * 2016-08-26
@@ -120,7 +113,7 @@ final class Charge extends \Df\PaypalClone\Charge {
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @return array(string => mixed)
 	 */
-	protected function pCharge() {$s = $this->s(); return [
+	protected function pCharge():array {$s = $this->s(); return [
 		# 2016-08-26
 		# Mandatory when EPS_TXNTYPE includes 3D Secure
 		# String, length 20

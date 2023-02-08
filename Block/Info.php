@@ -13,7 +13,7 @@ class Info extends \Df\Payment\Block\Info {
 	 * @see \Df\Payment\Block\Info::prepare()
 	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
 	 */
-	final protected function prepare() {
+	final protected function prepare():void {
 		$this->si('Card Number', str_replace('...', '*******', $this->e('pan')));
 		$this->siEx('SecurePay ID', $this->e()->idE());
 	}
