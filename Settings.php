@@ -12,6 +12,7 @@ final class Settings extends \Df\Payment\Settings\BankCard {
 
 	/**
 	 * 2016-08-26 «Mage2.PRO» → «Payment» → «SecurePay» → «Force the payment transactions result?»
+	 * @used-by \Dfe\SecurePay\ConfigProvider::config()
 	 */
 	function forceResult():bool {return $this->v();}
 
