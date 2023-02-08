@@ -18,7 +18,7 @@ final class Refund extends \Df\Payment\Operation {
 	 * 2016-08-20
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 */
-	private function process() {
+	private function process():void {
 		$s = $this->s(); /** @var Settings $s */
 		$tm = df_tm($this->m()); /** @var TM $tm */
 		$xA = df_xml_g('SecurePayMessage', [
