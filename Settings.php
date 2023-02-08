@@ -22,7 +22,6 @@ final class Settings extends \Df\Payment\Settings\BankCard {
 	 * 2016-08-26
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\SecurePay\Signer::sign()
-	 * @return string
 	 */
-	function password() {return $this->testablePV('transactionPassword');}
+	function password():string {return $this->testablePV('transactionPassword');}
 }
