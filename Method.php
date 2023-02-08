@@ -14,7 +14,6 @@ final class Method extends \Df\PaypalClone\Method {
 	 * https://github.com/mage2pro/alphacommercehub/blob/0.2.8/Method.php#L5-L26
 	 * @override
 	 * @see \Df\Payment\Method::amountFormat()
-	 * @param float $a
 	 * @return float
 	 */
 	function amountFormat(float $a) {
