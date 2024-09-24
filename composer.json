@@ -1,6 +1,6 @@
 {
 	"name": "mage2pro/securepay"
-	,"version": "1.8.0"
+	,"version": "1.8.1"
 	,"description": "SecurePay integration with Magento 2"
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro/c/extensions/securepay"
@@ -11,7 +11,7 @@
 		"homepage": "https://upwork.com/fl/mage2pro",
 		"role": "Developer"
 	}]
-	,"require": {"mage2pro/core": ">=5.8.0"}
+	,"require": {"mage2pro/core": ">=11.4.2"}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Dfe\\SecurePay\\": ""}}
 	,"keywords": [
 		"3D Secure"

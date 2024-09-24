@@ -2,7 +2,7 @@
 namespace Dfe\SecurePay;
 use Df\Payment\Operation\Source\Creditmemo as SCreditmemo;
 use Df\Payment\TM;
-use Df\Xml\X;
+use SimpleXMLElement as X;
 # 2016-08-30
 /** @method Method m() */
 final class Refund extends \Df\Payment\Operation {
@@ -31,8 +31,8 @@ final class Refund extends \Df\Payment\Operation {
 			,'MerchantInfo' => ['merchantID' => $s->merchantID(), 'password' => df_cdata($s->password())]
 			,'RequestType' => 'Payment'
 			,'Payment' => [
-				df_xml_node('TxnList', ['count' => 1], [
-					df_xml_node('Txn', ['ID' => 1], [
+				df_xml_go('TxnList', ['count' => 1], [
+					df_xml_go('Txn', ['ID' => 1], [
 						'txnType' => 4
 						,'txnSource' => 23
 						,'amount' => $this->amountF()
@@ -53,12 +53,12 @@ final class Refund extends \Df\Payment\Operation {
 		$xAL = df_xml_prettify(str_replace($s->password(), '*****', $xA)); /** @var string $xAL */
 		$xBL = df_xml_prettify($xB); /** @var string $xBL */
 		$this->m()->iiaSetTRR($xAL, $xBL);
-		$xxB = df_xml_parse($xB); /** @var X $xxB */
+		$xxB = df_xml_x($xB); /** @var X $xxB */
 		$status = $xxB->{'Status'}; /** @var X $status */
-		$code = df_leaf_sne($status->{'statusCode'}); /** @var string $code */
+		$code = strval($status->{'statusCode'}); /** @var string $code */
 		$errorMessage = null; /** @var $errorMessage */
 		if ('000' !== $code) {
-			$errorMessage = df_leaf_sne($status->{'statusDescription'});
+			$errorMessage = strval($status->{'statusDescription'});
 		}
 		else {
 			# 2016-09-01
@@ -86,8 +86,8 @@ final class Refund extends \Df\Payment\Operation {
 			#		<thinlinkEventStatusCode>999</thinlinkEventStatusCode>
 			#		<thinlinkEventStatusText>Error - Transaction Already Fully Refunded/Only $x.xx Available for Refund</thinlinkEventStatusText>
 			$txn = $xxB->{'Payment'}->{'TxnList'}->{'Txn'};/** @var X $txn */
-			if ('Yes' !== df_leaf_sne($txn->{'approved'})) {
-				$errorMessage = df_leaf_sne($txn->{'thinlinkEventStatusText'});
+			if ('Yes' !== strval($txn->{'approved'})) {
+				$errorMessage = strval($txn->{'thinlinkEventStatusText'});
 			}
 		}
 		if ($errorMessage) {
